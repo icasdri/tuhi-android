@@ -7,14 +7,17 @@
 
     <string name="nav_item_home">Notes</string>
     <string name="nav_item_notifications">Notifications</string>
+    <string name="nav_item_settings">Settings</string>
 
-    <!-- navigation drawer item labels  -->
+    <!-- update these when you add a hamburger  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_home</item>
         <item>@string/nav_item_notifications</item>
+        <item>@string/nav_item_settings</item>
     </string-array>
-
+'
     <string name="title_messages">Notifications</string>
     <string name="title_home">Notes</string>
+    <string name="title_settings">Settings</string>
 
 </resources>

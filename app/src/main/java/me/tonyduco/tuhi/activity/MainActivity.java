@@ -1,6 +1,7 @@
 package me.tonyduco.tuhi.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
@@ -57,12 +58,17 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
         if(id == R.id.action_search){
-            Toast.makeText(getApplicationContext(), "SEARCH SELECTED", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "SEARCH SELECTED", Toast.LENGTH_SHORT).show();
+
+            //Testing Settings Functionality
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+
             return true;
         }
 
@@ -76,6 +82,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
     private void displayView(int position) {
         Fragment fragment = null;
+        boolean skip = false;
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
@@ -86,11 +93,19 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
                 fragment = new NotificationFragment();
                 title = getString(R.string.title_messages);
                 break;
+            case 2:
+//                fragment = new SettingsFragment();
+//                title = "Settings";
+                skip = true;
+                title = "Settings";
+                Intent i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
+                break;
             default:
                 break;
         }
 
-        if (fragment != null) {
+        if (fragment != null && !skip) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
