@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="preferences">
-    <me.tonyduco.tuhi.preference.ToolbarPreference
-        android:key="preferences"
-        android:title="Settings" />
     <EditTextPreference android:title="Server Address"
         android:key="server-hostname"
         android:summary="Enter your server's host address"></EditTextPreference>
