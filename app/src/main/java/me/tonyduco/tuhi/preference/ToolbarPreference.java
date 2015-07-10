@@ -26,18 +26,7 @@ public class ToolbarPreference extends Preference {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.settings_toolbar, parent, false);
 
-        Toolbar toolbar = (Toolbar) layout.findViewById(R.id.settings_toolbar);
-        //toolbar.setNavigationIcon(R.drawable.icon_back);
-        toolbar.setTitle(getTitle());
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PreferenceScreen prefScreen = (PreferenceScreen) getPreferenceManager().findPreference(getKey());
-                prefScreen.getDialog().dismiss();
-                //finishActivity();
-                //NavUtils.navigateUpFromSameTask();
-            }
-        });
+
 
         return layout;
     }
