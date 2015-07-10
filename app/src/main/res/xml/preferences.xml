@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <me.tonyduco.tuhi.preference.ToolbarPreference
+        android:key="settings_toolbar"
+        android:title="Settings" />
+    <EditTextPreference android:title="Server Address"
+        android:key="server-hostname"
+        android:summary="Enter your server's host address"></EditTextPreference>
+    <PreferenceScreen
+    android:key="authenication-settings"
+    android:title="Authenication Settings">
+        <EditTextPreference android:title="Username"
+            android:key="server-username"
+            android:summary="Please enter your username"></EditTextPreference>
+        <EditTextPreference android:title="Password"
+            android:key="server-password"
+            android:summary="Please enter your password"></EditTextPreference>
+    </PreferenceScreen>
+    <CheckBoxPreference android:title="Sync with Server"
+        android:defaultValue="false"
+        android:summary="This option if selected will allow the application to sync with a Tuhi hosted server"
+        android:key="server-sync" />
+    <ListPreference     android:title="Download Details"
+        android:summary="Select the kind of data that you would like to download"
+        android:key="downloadType"
+        android:defaultValue="1"
+        android:entries="@array/listArray"
+        android:entryValues="@array/listValues" />
 </PreferenceScreen>

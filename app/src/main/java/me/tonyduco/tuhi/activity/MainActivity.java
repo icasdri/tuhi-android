@@ -1,6 +1,7 @@
 package me.tonyduco.tuhi.activity;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -99,6 +100,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
                 skip = true;
                 title = "Settings";
                 Intent i = new Intent(this, SettingsActivity.class);
+
                 startActivity(i);
                 break;
             default:
