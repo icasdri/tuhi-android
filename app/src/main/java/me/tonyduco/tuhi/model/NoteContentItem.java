@@ -11,19 +11,17 @@ public class NoteContentItem {
     private String data;
     private long date_created;
 
-    public NoteContentItem(String note, String data){
-        this.note_content_id = UUID.randomUUID().toString();
-        this.note = note;
-        this.data = data;
-        this.date_created = System.currentTimeMillis()/1000;
-    }
-
     public NoteContentItem(String note_content_id, String note, String data, long date_created){
         this.note_content_id = note_content_id;
         this.note = note;
         this.data = data;
         this.date_created = date_created;
     }
+
+    public NoteContentItem(String note, String data){
+        this(UUID.randomUUID().toString(), note, data, System.currentTimeMillis()/1000);
+    }
+
 
     public String getNoteContentId(){
         return note_content_id;
