@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.NoteAdapter;
+import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 
 public class HomeFragment extends Fragment {
 
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         mAdapter = new NoteAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
