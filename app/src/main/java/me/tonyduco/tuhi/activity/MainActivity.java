@@ -27,10 +27,6 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
     private static String TAG = MainActivity.class.getSimpleName();
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
 
@@ -51,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         drawerFragment.setDrawerListener(this);
 
         // display the first navigation drawer view on app launch
-        displayView(0);
+        displayView(1);
     }
 
 
@@ -117,25 +113,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
             default:
                 break;
         }
-        if(title.equals("Notes")) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment);
-            fragmentTransaction.commit();
-
-            // set the toolbar title
-            getSupportActionBar().setTitle(title);
-            mRecyclerView = (RecyclerView) findViewById(R.id.note_view);
-            mRecyclerView.setHasFixedSize(true);
-
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-
-            mAdapter = new NoteAdapter();
-            mRecyclerView.setAdapter(mAdapter);
-
-
-        }else if (fragment != null && !skip) {
+        if (fragment != null && !skip) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
