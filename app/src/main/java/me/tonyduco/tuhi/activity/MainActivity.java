@@ -16,12 +16,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import android.support.v4.widget.DrawerLayout;
+
+import java.util.ArrayList;
+
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.FragmentDrawer;
+import me.tonyduco.tuhi.adapter.NoteAdapter;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
 
     private static String TAG = MainActivity.class.getSimpleName();
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
@@ -30,7 +38,6 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -110,8 +117,25 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
             default:
                 break;
         }
+        if(title.equals("Notes")) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.commit();
 
-        if (fragment != null && !skip) {
+            // set the toolbar title
+            getSupportActionBar().setTitle(title);
+            mRecyclerView = (RecyclerView) findViewById(R.id.note_view);
+            mRecyclerView.setHasFixedSize(true);
+
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+
+            mAdapter = new NoteAdapter();
+            mRecyclerView.setAdapter(mAdapter);
+
+
+        }else if (fragment != null && !skip) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
