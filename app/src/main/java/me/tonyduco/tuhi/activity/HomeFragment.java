@@ -27,16 +27,6 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-        // Inflate the layout for this fragment
-        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.note_view);
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(getActivity().findViewById(R.id.content));
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new NoteAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
@@ -44,6 +34,17 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+
+
+        // Inflate the layout for this fragment
+        mRecyclerView = (RecyclerView)rootView.findViewById(R.id.note_view);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new NoteAdapter();
+        mRecyclerView.setAdapter(mAdapter);
 
         return rootView;
     }

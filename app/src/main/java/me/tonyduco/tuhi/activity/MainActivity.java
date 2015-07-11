@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         drawerFragment.setDrawerListener(this);
 
         // display the first navigation drawer view on app launch
-        displayView(1);
+        displayView(0);
     }
 
 
@@ -71,6 +71,9 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         //}
 
         if(id == R.id.action_search){
+            //need to implement search functionality
+
+
             //Toast.makeText(getApplicationContext(), "SEARCH SELECTED", Toast.LENGTH_SHORT).show();
 
             //Testing Settings Functionality
