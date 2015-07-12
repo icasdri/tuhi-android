@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        mAdapter = new NoteAdapter();
+        mAdapter = new NoteAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         return rootView;

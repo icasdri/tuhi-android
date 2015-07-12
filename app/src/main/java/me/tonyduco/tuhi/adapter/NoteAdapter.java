@@ -1,5 +1,7 @@
 package me.tonyduco.tuhi.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +13,14 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.NoteActivity;
+import me.tonyduco.tuhi.activity.SettingsActivity;
 
 /**
  * Created by tony on 7/10/15.
  */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
+    private Activity activity;
     private ArrayList<String> mDataset = new ArrayList<String>() {{
         add("Test note");
         add("hehe");
@@ -24,6 +29,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         add("xmls shouldnt exist");
         add("java?");
     }};
+
+    public NoteAdapter(Activity activity){
+        super();
+        this.activity = activity;
+    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -43,8 +53,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         notifyItemInserted(position);
     }
 
-    public void remove(String item){
+    public void openNote(String item){
         int position = mDataset.indexOf(item);
+        Intent i = new Intent(activity, NoteActivity.class);
+        i.putExtra("NOTE_ITEM", "This is a note hahahhahahahahahah");
+        activity.startActivity(i);
         mDataset.remove(position);
         notifyItemRemoved(position);
 
@@ -64,7 +77,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                remove(name);
+                openNote(name);
             }
         });
         holder.data.setText("asdf");
