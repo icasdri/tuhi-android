@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.FragmentDrawer;
 import me.tonyduco.tuhi.adapter.NoteAdapter;
+import me.tonyduco.tuhi.model.NoteItem;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -103,6 +104,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
             case 1:
                 fragment = new NotificationFragment();
                 title = getString(R.string.title_messages);
+                NoteItem testNote = new NoteItem(0, "TestNote");
+                testNote.save();
                 break;
             case 2:
 //                fragment = new SettingsFragment();

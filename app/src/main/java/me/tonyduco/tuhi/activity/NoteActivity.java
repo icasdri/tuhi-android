@@ -14,14 +14,14 @@ import me.tonyduco.tuhi.model.NoteItem;
  */
 public class NoteActivity extends ActionBarActivity {
 
-    //public final static NoteItem NOTE_ITEM = new NoteItem(0, null);
-    public static String NOTE_ITEM = "";
+    public static NoteItem NOTE_ITEM;
+    //public static String NOTE_ITEM = "";
     private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NOTE_ITEM = getIntent().getStringExtra("NOTE_ITEM");
+        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("note_item");
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new NoteFragment()).commit();
 
@@ -33,7 +33,8 @@ public class NoteActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         EditText textView = (EditText) findViewById(R.id.note_text_view);
-        textView.setText(NOTE_ITEM);
+        mToolbar.setTitle(NOTE_ITEM.getTitle());
+        textView.setText("This is a sample note");
 
     }
 }

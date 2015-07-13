@@ -11,24 +11,20 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.NoteActivity;
 import me.tonyduco.tuhi.activity.SettingsActivity;
+import me.tonyduco.tuhi.model.NoteItem;
 
 /**
  * Created by tony on 7/10/15.
  */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private Activity activity;
-    private ArrayList<String> mDataset = new ArrayList<String>() {{
-        add("Test note");
-        add("hehe");
-        add("Tuhi = cewl");
-        add("pls work");
-        add("xmls shouldnt exist");
-        add("java?");
-    }};
+    private List<NoteItem> noteDataset = NoteItem.listAll(NoteItem.class);
+
 
     public NoteAdapter(Activity activity){
         super();
@@ -49,17 +45,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
     public void add(int position, String item){
-        mDataset.add(position, item);
-        notifyItemInserted(position);
+       // mDataset.add(position, item);
+        //notifyItemInserted(position);
     }
 
-    public void openNote(String item){
-        int position = mDataset.indexOf(item);
+    public void openNote(NoteItem note){
         Intent i = new Intent(activity, NoteActivity.class);
-        i.putExtra("NOTE_ITEM", "This is a note hahahhahahahahahah");
+        i.putExtra("NOTE_ITEM", note);
         activity.startActivity(i);
-        mDataset.remove(position);
-        notifyItemRemoved(position);
+
+        //Use code below to reset view
+   //     notifyItemRemoved(position);
 
     }
 
@@ -72,19 +68,19 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
-        final String name = mDataset.get(position);
-        holder.title.setText(mDataset.get(position));
+        final NoteItem note = noteDataset.get(position);
+        holder.title.setText(note.getTitle());
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNote(name);
+                openNote(note);
             }
         });
-        holder.data.setText("asdf");
+        holder.data.setText("This is for testing purposes");
     }
 
     @Override
     public int getItemCount(){
-        return mDataset.size();
+        return noteDataset.size();
     }
 }

@@ -1,11 +1,13 @@
 package me.tonyduco.tuhi.model;
 
+import com.orm.SugarRecord;
+
 import java.util.UUID;
 
 /**
  * Created by Tony on 7/10/2015.
  */
-public class NoteContentItem {
+public class NoteContentItem extends SugarRecord<NoteContentItem> {
     private String note_content_id;
     private String note;
     private String data;

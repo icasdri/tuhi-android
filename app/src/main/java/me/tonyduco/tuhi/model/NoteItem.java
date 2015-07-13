@@ -1,11 +1,14 @@
 package me.tonyduco.tuhi.model;
 
+import com.orm.SugarRecord;
+
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by Tony on 7/10/2015.
  */
-public class NoteItem {
+public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
 
     private String note_id;
     private String title;
