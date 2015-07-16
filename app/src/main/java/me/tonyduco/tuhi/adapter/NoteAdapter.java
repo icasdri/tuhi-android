@@ -25,12 +25,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private Activity activity;
     private List<NoteItem> noteDataset = NoteItem.listAll(NoteItem.class);
 
-
     public NoteAdapter(Activity activity){
         super();
         this.activity = activity;
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView title;
@@ -42,11 +40,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             data = (TextView) v.findViewById(R.id.note_data);
 
         }
-    }
-
-    public void add(int position, String item){
-       // mDataset.add(position, item);
-        //notifyItemInserted(position);
     }
 
     public void openNote(NoteItem note){
