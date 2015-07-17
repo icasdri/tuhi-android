@@ -9,18 +9,18 @@ import java.util.UUID;
  */
 public class NoteContentItem extends SugarRecord<NoteContentItem> {
     private String note_content_id;
-    private String note;
+    private NoteItem note;
     private String data;
     private long date_created;
 
-    public NoteContentItem(String note_content_id, String note, String data, long date_created){
+    public NoteContentItem(String note_content_id, NoteItem note, String data, long date_created){
         this.note_content_id = note_content_id;
         this.note = note;
         this.data = data;
         this.date_created = date_created;
     }
 
-    public NoteContentItem(String note, String data){
+    public NoteContentItem(NoteItem note, String data){
         this(UUID.randomUUID().toString(), note, data, System.currentTimeMillis()/1000);
     }
 
@@ -29,7 +29,7 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
         return note_content_id;
     }
 
-    public String getNote(){
+    public NoteItem getNote(){
         return note;
     }
 
@@ -45,7 +45,7 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
         this.note_content_id = note_content_id;
     }
 
-    public void setNote(String note){
+    public void setNote(NoteItem note){
         this.note = note;
     }
 

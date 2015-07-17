@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 
 /**
@@ -20,6 +22,8 @@ import me.tonyduco.tuhi.model.NoteItem;
 public class NewNoteActivity extends ActionBarActivity {
 
     Toolbar mToolbar;
+    EditText title;
+    EditText data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,9 @@ public class NewNoteActivity extends ActionBarActivity {
         getFragmentManager().beginTransaction().replace(android.R.id.content, new NewNoteFragment()).commit();
 
         setContentView(R.layout.fragment_new_note);
+
+        title = (EditText) findViewById(R.id.newnote_title);
+        data = (EditText) findViewById(R.id.newnote_content);
 
     }
 
@@ -59,8 +66,11 @@ public class NewNoteActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_add){
-            NoteItem note = new NoteItem("NewNote");
+            NoteItem note = new NoteItem(title.getText().toString());
+
+            NoteContentItem noteContent = new NoteContentItem(note, data.getText().toString());
             note.save();
+            noteContent.save();
             finish();
             return true;
         }

@@ -15,7 +15,6 @@ import me.tonyduco.tuhi.model.NoteItem;
 public class NoteActivity extends ActionBarActivity {
 
     public static NoteItem NOTE_ITEM;
-    //public static String NOTE_ITEM = "";
     private Toolbar mToolbar;
 
     @Override
