@@ -21,7 +21,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         this.deleted = deleted;
         this.date_modified = date_modified;
     }
-    public NoteItem(int user, String title){
+    public NoteItem(String title){
         this(UUID.randomUUID().toString(), title, false, System.currentTimeMillis()/1000);
     }
 

@@ -65,7 +65,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
         if(id == R.id.action_search){
             //Toast.makeText(getApplicationContext(), "SEARCH SELECTED", Toast.LENGTH_SHORT).show();
-
+            NoteItem note = new NoteItem("123");
+            note.save();
             return true;
         }
 
@@ -89,8 +90,6 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
             case 1:
                 fragment = new NotificationFragment();
                 title = getString(R.string.title_messages);
-                NoteItem testNote = new NoteItem(0, "TestNote");
-                testNote.save();
                 break;
             case 2:
                 skip = true;
