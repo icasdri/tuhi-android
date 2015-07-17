@@ -15,6 +15,10 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
     private boolean deleted;
     private long date_modified;
 
+    public NoteItem(){
+
+    }
+
     public NoteItem(String note_id, String title, boolean deleted, long date_modified){
         this.note_id = note_id;
         this.title = title;
