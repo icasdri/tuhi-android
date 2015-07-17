@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="me.tonyduco.tuhi.activity.NewNoteFragment"
+    android:id="@+id/newnote_layout"
+    android:orientation="vertical">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newnote_title"/>
+    <!-- TODO: Update blank fragment layout -->
+    <EditText android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|left"
+        android:inputType="textLongMessage"
+        android:text=""
+        android:id="@+id/newnote_content"
+        android:layout_below="@+id/newnote_title" />
+</LinearLayout>

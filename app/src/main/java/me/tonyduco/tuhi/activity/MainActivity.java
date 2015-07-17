@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.support.v4.widget.DrawerLayout;
 
@@ -35,7 +36,16 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ImageButton floatingButton = (ImageButton) findViewById(R.id.fab_image_button);
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //new note menu
+                //openNote(note);
+                Intent i = new Intent(v.getContext(), NewNoteActivity.class);
+                startActivity(i);
+            }
+        });
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -48,7 +58,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         drawerFragment.setDrawerListener(this);
 
         // display the first navigation drawer view on app launch
-        displayView(1);
+        displayView(0);
     }
 
 
