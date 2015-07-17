@@ -21,7 +21,7 @@ public class NoteActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("note_item");
+        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new NoteFragment()).commit();
 

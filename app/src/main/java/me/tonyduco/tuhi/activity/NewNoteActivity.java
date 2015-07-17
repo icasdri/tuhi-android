@@ -59,8 +59,9 @@ public class NewNoteActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_add){
-            NoteItem note = new NoteItem("123");
+            NoteItem note = new NoteItem("NewNote");
             note.save();
+            finish();
             return true;
         }
 
