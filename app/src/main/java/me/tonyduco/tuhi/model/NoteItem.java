@@ -3,6 +3,9 @@ package me.tonyduco.tuhi.model;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -33,6 +36,14 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         return note_id;
     }
 
+    public NoteContentItem getContent(){
+        List<NoteContentItem> noteContentDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", note_id);
+        Collections.sort(noteContentDataset, new Comparator<NoteContentItem>(){
+            public int compare(NoteContentItem a, NoteContentItem b){
+                return a.getDateCreated() > b.getDateCreated();
+            }
+        });
+    }
     public String getTitle(){
         return title;
     }

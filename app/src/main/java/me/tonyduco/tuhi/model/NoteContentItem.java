@@ -2,25 +2,26 @@ package me.tonyduco.tuhi.model;
 
 import com.orm.SugarRecord;
 
+import java.util.Comparator;
 import java.util.UUID;
 
 /**
  * Created by Tony on 7/10/2015.
  */
-public class NoteContentItem extends SugarRecord<NoteContentItem> {
+public class NoteContentItem extends SugarRecord<NoteContentItem> implements Comparable<NoteContentItem> {
     private String note_content_id;
-    private NoteItem note;
+    private String note;
     private String data;
     private long date_created;
 
-    public NoteContentItem(String note_content_id, NoteItem note, String data, long date_created){
+    public NoteContentItem(String note_content_id, String note, String data, long date_created){
         this.note_content_id = note_content_id;
         this.note = note;
         this.data = data;
         this.date_created = date_created;
     }
 
-    public NoteContentItem(NoteItem note, String data){
+    public NoteContentItem(String note, String data){
         this(UUID.randomUUID().toString(), note, data, System.currentTimeMillis()/1000);
     }
 
@@ -29,7 +30,7 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
         return note_content_id;
     }
 
-    public NoteItem getNote(){
+    public String getNote(){
         return note;
     }
 
@@ -45,7 +46,7 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
         this.note_content_id = note_content_id;
     }
 
-    public void setNote(NoteItem note){
+    public void setNote(String note){
         this.note = note;
     }
 
@@ -55,5 +56,10 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
 
     public void setDateCreated(long date_created){
         this.date_created = date_created;
+    }
+
+    @Override
+    public int compareTo(NoteContentItem noteContent) {
+        return this.getDateCreated().compareTo(noteContent.getDateCreated());
     }
 }
