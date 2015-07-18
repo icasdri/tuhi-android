@@ -15,21 +15,21 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
 
     private String note_id;
     private String title;
-    private boolean deleted;
+    private String deleted;
     private long date_modified;
 
     public NoteItem(){
 
     }
 
-    public NoteItem(String note_id, String title, boolean deleted, long date_modified){
+    public NoteItem(String note_id, String title, String deleted, long date_modified){
         this.note_id = note_id;
         this.title = title;
         this.deleted = deleted;
         this.date_modified = date_modified;
     }
     public NoteItem(String title){
-        this(UUID.randomUUID().toString(), title, false, System.currentTimeMillis()/1000);
+        this(UUID.randomUUID().toString(), title, "0", System.currentTimeMillis()/1000);
     }
 
     public String getNoteId(){
@@ -49,7 +49,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         return title;
     }
 
-    public boolean isDeleted(){
+    public String isDeleted(){
         return deleted;
     }
 
@@ -65,7 +65,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         this.title = title;
     }
 
-    public void setDeleted(boolean deleted){
+    public void setDeleted(String deleted){
         this.deleted = deleted;
     }
 

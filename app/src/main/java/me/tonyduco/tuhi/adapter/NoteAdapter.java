@@ -8,14 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.NoteActivity;
-import me.tonyduco.tuhi.activity.SettingsActivity;
 import me.tonyduco.tuhi.model.NoteItem;
 
 /**
@@ -23,7 +19,8 @@ import me.tonyduco.tuhi.model.NoteItem;
  */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private Activity activity;
-    private List<NoteItem> noteDataset = NoteItem.listAll(NoteItem.class);
+   // private List<NoteItem> noteDataset = NoteItem.listAll(NoteItem.class);
+    private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "deleted = ?", "0");
 
     public NoteAdapter(Activity activity){
         super();
