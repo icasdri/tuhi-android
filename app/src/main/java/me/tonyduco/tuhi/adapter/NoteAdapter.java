@@ -69,7 +69,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 openNote(note);
             }
         });
-        holder.data.setText("This is for testing purposes");
+        holder.data.setText(note.getContent().getData());
+        //holder.data.setText("This is for testing purposes");
     }
 
     @Override

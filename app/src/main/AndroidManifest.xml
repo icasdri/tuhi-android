@@ -11,7 +11,7 @@
         android:name="com.orm.SugarApp"
         android:theme="@style/TuhiMaterialTheme" >
         <meta-data android:name="DATABASE" android:value="tuhi-notes.db" />
-        <meta-data android:name="VERSION" android:value="10" />
+        <meta-data android:name="VERSION" android:value="23" />
         <meta-data android:name="QUERY_LOG" android:value="true" />
         <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="me.tonyduco.tuhi.model" />
         <activity

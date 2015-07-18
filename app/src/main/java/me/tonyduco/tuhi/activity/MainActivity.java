@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.FragmentDrawer;
 import me.tonyduco.tuhi.adapter.NoteAdapter;
+import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -75,8 +76,10 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
         if(id == R.id.action_search){
             //Toast.makeText(getApplicationContext(), "SEARCH SELECTED", Toast.LENGTH_SHORT).show();
-            NoteItem note = new NoteItem("123");
-            note.save();
+            NoteItem testName = new NoteItem("asdf");
+            NoteContentItem testContent = new NoteContentItem(testName.getNoteId(), "asdfsadf");
+            testName.save();
+            testContent.save();
             return true;
         }
 
