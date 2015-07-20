@@ -1,9 +1,11 @@
 package me.tonyduco.tuhi.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,7 +37,10 @@ public class NoteActivity extends ActionBarActivity {
 
         textView = (EditText) findViewById(R.id.note_text_view);
 
-        mToolbar.setTitle(NOTE_ITEM.getTitle());
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(textView, InputMethodManager.SHOW_IMPLICIT);
+
+        mToolbar.setTitle(NOTE_ITEM.getContent().getTitle());
         textView.setText(NOTE_ITEM.getContent().getData().toString());
 
     }
