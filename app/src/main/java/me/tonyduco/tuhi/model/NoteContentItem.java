@@ -51,6 +51,14 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
         }
     }
 
+    public String getContentPreview(){
+        if(getData().indexOf("\n") == -1) {
+            return "";
+        }else{
+            return getData().substring(getData().indexOf("\n")+1, getData().length());
+        }
+    }
+
     public Long getDateCreated(){
         return date_created;
     }
