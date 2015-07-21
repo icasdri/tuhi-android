@@ -16,11 +16,10 @@
         app:theme="@style/ToolBarStyle"
         android:theme="@style/ToolBarStyle" />
 
-    <!-- TODO: Update blank fragment layout -->
     <EditText android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top|left"
-        android:inputType="textLongMessage"
+        android:inputType="textMultiLine"
         android:text=""
         android:id="@+id/note_text_view"
         android:layout_below="@+id/note_toolbar" />
