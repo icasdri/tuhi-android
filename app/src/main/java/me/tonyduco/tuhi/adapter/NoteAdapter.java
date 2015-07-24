@@ -41,6 +41,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         }
     }
 
+
     public void openNote(NoteItem note){
         Intent i = new Intent(activity, NoteActivity.class);
         i.putExtra("NOTE_ITEM", note);
@@ -69,7 +70,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             }
         });
         holder.data.setText(note.getContent().getContentPreview());
-        //holder.data.setText("This is for testing purposes");
+    }
+
+    public void refreshDataset(){
+        noteDataset = NoteItem.find(NoteItem.class, "deleted = ?", "0");
     }
 
     @Override

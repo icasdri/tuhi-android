@@ -23,7 +23,8 @@ public class HomeFragment extends Fragment {
 
 
     private SuperRecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    //private RecyclerView.Adapter mAdapter;
+    private NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public HomeFragment() {
@@ -41,11 +42,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-        // Inflate the layout for this fragment
         mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.note_view);
-       // mRecyclerView.setHasFixedSize(true);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.attachToRecyclerView(mRecyclerView.getRecyclerView());
@@ -68,6 +65,7 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mAdapter.refreshDataset();
                 mAdapter.notifyDataSetChanged();
             }});
 
