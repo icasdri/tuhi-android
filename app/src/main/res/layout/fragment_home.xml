@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_action_content_new"
-        fab:fab_colorNormal="@color/primary"
-        fab:fab_colorPressed="@color/primary_pressed"
-        fab:fab_colorRipple="@color/ripple" />
+        android:src="@drawable/ic_add_white_24dp"
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorAccent"
+        fab:fab_colorRipple="@color/colorPrimaryDark" />
 
 </RelativeLayout>
