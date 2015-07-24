@@ -56,8 +56,15 @@ public class NoteActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
-           // NOTE_ITEM.save();
+            NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+            newContent.save();
+            onBackPressed();
+            return true;
+        }
+        if(id == R.id.action_delete){
+            NOTE_ITEM.setDeleted("1");
             NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
             newContent.save();
             onBackPressed();
