@@ -1,6 +1,7 @@
 package me.tonyduco.tuhi.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
+import com.melnykov.fab.FloatingActionButton;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.NoteAdapter;
@@ -44,6 +46,17 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.note_view);
        // mRecyclerView.setHasFixedSize(true);
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.attachToRecyclerView(mRecyclerView.getRecyclerView());
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), NewNoteActivity.class);
+                startActivity(i);
+            }
+        });
+
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
