@@ -37,6 +37,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         ImageButton floatingButton = (ImageButton) findViewById(R.id.fab_image_button);
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +50,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
             }
         });
 
+
+        
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
