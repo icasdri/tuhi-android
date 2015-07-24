@@ -1,7 +1,5 @@
 package me.tonyduco.tuhi.activity;
 
-import android.app.Activity;
-import android.app.Notification;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,8 +19,6 @@ import me.tonyduco.tuhi.model.NoteItem;
  */
 public class NewNoteActivity extends ActionBarActivity {
 
-    Toolbar mToolbar;
-    EditText title;
     EditText data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +28,6 @@ public class NewNoteActivity extends ActionBarActivity {
 
         setContentView(R.layout.fragment_new_note);
 
-        title = (EditText) findViewById(R.id.newnote_title);
         data = (EditText) findViewById(R.id.newnote_content);
 
     }
@@ -41,7 +36,7 @@ public class NewNoteActivity extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        LinearLayout root = (LinearLayout)findViewById(R.id.newnote_title).getParent().getParent().getParent();
+        LinearLayout root = (LinearLayout)findViewById(R.id.newnote_content).getParent().getParent().getParent();
         Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.newnote_toolbar, root, false);
         root.addView(bar, 0); // insert at top
         bar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -64,16 +59,14 @@ public class NewNoteActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if(id == R.id.action_add){
-            NoteItem note = new NoteItem(title.getText().toString());
+            NoteItem note = new NoteItem();
             NoteContentItem noteContent = new NoteContentItem(note.getNoteId(), data.getText().toString());
             note.save();
             noteContent.save();
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
