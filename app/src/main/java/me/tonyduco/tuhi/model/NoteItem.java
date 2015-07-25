@@ -40,7 +40,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         return noteContentDataset.get(0);
     }
 
-    public String isDeleted(){
+    public String getDeleted(){
         return deleted;
     }
 
