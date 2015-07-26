@@ -69,7 +69,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 openNote(note);
             }
         });
-        holder.data.setText(note.getContent().getContentPreview());
+    //    holder.data.setText(note.getContent().getContentPreview());
+        holder.data.setText(note.getDeleted());
     }
 
     public void refreshDataset(){
