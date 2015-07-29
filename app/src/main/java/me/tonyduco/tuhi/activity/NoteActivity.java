@@ -67,12 +67,10 @@ public class NoteActivity extends ActionBarActivity {
             return true;
         }
         if(id == R.id.action_delete){
-           // NOTE_ITEM.setDeleted("1");
-            List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "note_id = ?", NOTE_ITEM.getNoteId());
+            List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "noteid = ?", NOTE_ITEM.getNoteId());
             noteDataset.get(0).setDeleted("1");
             noteDataset.get(0).save();
             NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
-         //   NOTE_ITEM.save();
             newContent.save();
             onBackPressed();
             return true;

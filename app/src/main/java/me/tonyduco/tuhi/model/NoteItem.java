@@ -13,12 +13,12 @@ import java.util.UUID;
  */
 public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
 
-    private String note_id;
+    private String noteid;
     private String deleted;
     private long date_modified;
 
     public NoteItem(String note_id, String deleted, long date_modified){
-        this.note_id = note_id;
+        this.noteid = note_id;
         this.deleted = deleted;
         this.date_modified = date_modified;
     }
@@ -27,11 +27,11 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
     }
 
     public String getNoteId(){
-        return note_id;
+        return noteid;
     }
 
     public NoteContentItem getContent(){
-        List<NoteContentItem> noteContentDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", note_id);
+        List<NoteContentItem> noteContentDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", noteid);
         Collections.sort(noteContentDataset, new Comparator<NoteContentItem>(){
             public int compare(NoteContentItem a, NoteContentItem b){
                 return b.getDateCreated().compareTo(a.getDateCreated());
@@ -49,7 +49,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
     }
 
     public void setNoteId(String note_id){
-        this.note_id = note_id;
+        this.noteid = note_id;
     }
 
     public void setDeleted(String deleted){
