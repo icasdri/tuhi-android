@@ -23,7 +23,6 @@ public class HomeFragment extends Fragment {
 
 
     private SuperRecyclerView mRecyclerView;
-    //private RecyclerView.Adapter mAdapter;
     private NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 

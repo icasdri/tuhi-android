@@ -1,30 +1,20 @@
 package me.tonyduco.tuhi.activity;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
 import android.support.v4.widget.DrawerLayout;
-
-import java.util.ArrayList;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.FragmentDrawer;
-import me.tonyduco.tuhi.adapter.NoteAdapter;
-import me.tonyduco.tuhi.model.NoteContentItem;
-import me.tonyduco.tuhi.model.NoteItem;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -90,8 +80,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_home);
                 break;
             case 1:
-                fragment = new NotificationFragment();
-                title = getString(R.string.title_messages);
+                fragment = new TrashFragment();
+                title = "Trash";
                 break;
             case 2:
                 skip = true;

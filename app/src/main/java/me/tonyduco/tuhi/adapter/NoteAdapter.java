@@ -21,9 +21,7 @@ import me.tonyduco.tuhi.model.NoteItem;
  */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private Activity activity;
-   // private List<NoteItem> noteDataset = NoteItem.listAll(NoteItem.class);
     private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "deleted = ?", "0");
-
     public NoteAdapter(Activity activity){
         super();
         this.activity = activity;
@@ -48,7 +46,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         activity.startActivity(i);
 
         //Use code below to reset view
-   //     notifyItemRemoved(position);
+        //notifyItemRemoved(position);
 
     }
 
@@ -69,8 +67,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 openNote(note);
             }
         });
-    //    holder.data.setText(note.getContent().getContentPreview());
-        holder.data.setText(note.getDeleted());
+        holder.data.setText(note.getContent().getContentPreview());
     }
 
     public void refreshDataset(){
@@ -79,6 +76,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public int getItemCount(){
-        return noteDataset.size();
+            return noteDataset.size();
     }
 }
