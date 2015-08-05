@@ -34,7 +34,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
     }
 
     @Override
@@ -66,7 +65,8 @@ public class HomeFragment extends Fragment {
             public void onRefresh() {
                 mAdapter.refreshDataset();
                 mAdapter.notifyDataSetChanged();
-            }});
+            }
+        });
 
         mRecyclerView.setupMoreListener(new OnMoreListener() {
             @Override
@@ -75,16 +75,23 @@ public class HomeFragment extends Fragment {
             }
         }, 10);
 
-            return rootView;
-        }
-
-        @Override
-        public void onAttach (Activity activity){
-            super.onAttach(activity);
-        }
-
-        @Override
-        public void onDetach () {
-            super.onDetach();
-        }
+        return rootView;
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.refreshDataset();
+        mAdapter.notifyDataSetChanged();
+    }
+}
