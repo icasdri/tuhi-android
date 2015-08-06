@@ -19,11 +19,14 @@ import me.tonyduco.tuhi.model.NoteItem;
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
     private Activity activity;
+    private NoteItem NOTE_ITEM;
     private List<NoteContentItem> historyDataset;
 
     public HistoryAdapter(Activity activity){
         super();
         this.activity = activity;
+        NOTE_ITEM = (NoteItem) this.activity.getIntent().getSerializableExtra("NOTE_ITEM");
+        historyDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", NOTE_ITEM.getNoteId());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -47,16 +50,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteContentItem noteContent = historyDataset.get(position);
-        holder.date.setText(noteContent.getContent().getTitle());
+        holder.date.setText(String.valueOf(noteContent.getDateCreated()));
+        holder.title.setText(noteContent.getContentPreview());
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //DO STUFF HERE
             }
         });
-
-        //get NOTE_ITEM from Content
-        holder.title.setText(activity.getContent().getContentPreview());
     }
 
     @Override

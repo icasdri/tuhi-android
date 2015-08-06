@@ -21,7 +21,7 @@
         android:id="@+id/history_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/note_data"
+        android:layout_above="@id/history_title"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"

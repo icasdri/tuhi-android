@@ -6,6 +6,20 @@
     android:orientation="vertical"
 tools:context="me.tonyduco.tuhi.activity.HistoryFragment">
 
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/history_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationContentDescription="@string/abc_action_bar_up_description"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:title="Tuhi"
+        app:theme="@style/ToolBarStyle"
+        android:theme="@style/ToolBarStyle" />
+
     <com.malinskiy.superrecyclerview.SuperRecyclerView
         android:id="@+id/history_view"
         xmlns:app="http://schemas.android.com/apk/res-auto"
