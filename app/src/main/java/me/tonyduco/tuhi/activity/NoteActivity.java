@@ -1,6 +1,7 @@
 package me.tonyduco.tuhi.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -74,6 +75,12 @@ public class NoteActivity extends ActionBarActivity {
             newContent.save();
             onBackPressed();
             return true;
+        }
+        if(id == R.id.action_history){
+            Intent i = new Intent(this, HistoryActivity.class);
+            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            startActivity(i);
+
         }
         return false;
     }

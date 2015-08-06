@@ -13,6 +13,7 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
     private String note;
     private String data;
     private Long date_created;
+    private int type;
 
 
     public NoteContentItem(){
@@ -63,6 +64,10 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
         return date_created;
     }
 
+    public int getType() {
+        return type;
+    }
+
     public void setNoteContentId(String note_content_id){
         this.note_content_id = note_content_id;
     }
@@ -77,6 +82,10 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
 
     public void setDateCreated(long date_created){
         this.date_created = date_created;
+    }
+
+    public void setType(int type){
+        this.type = type;
     }
 
 }
