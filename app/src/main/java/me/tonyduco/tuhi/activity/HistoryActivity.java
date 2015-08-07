@@ -5,17 +5,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.HistoryAdapter;
 import me.tonyduco.tuhi.decoration.DividerItemDecoration;
+import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
 import me.tonyduco.tuhi.model.NoteItem;
 
-public class HistoryActivity extends ActionBarActivity {
+public class HistoryActivity extends ActionBarActivity  implements RecyclerItemClickListener.OnItemClickListener {
 
     public static NoteItem NOTE_ITEM;
     private Toolbar mToolbar;
@@ -29,8 +32,6 @@ public class HistoryActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
-
-       // getFragmentManager().beginTransaction().replace(android.R.id.content, new HistoryFragment()).commit();
 
         setContentView(R.layout.fragment_history);
 
@@ -48,19 +49,29 @@ public class HistoryActivity extends ActionBarActivity {
 
         mAdapter = new HistoryAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
+
     }
 
+    @Override
+    public void onItemClick(View childView, int position) {
+        Log.d("TUHI", "ASDFasdfdsafadsfdasfadsf");
+    }
+
+    @Override
+    public void onItemLongPress(View childView, int position) {
+        Log.d("TUHI", "Long press");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_history, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }

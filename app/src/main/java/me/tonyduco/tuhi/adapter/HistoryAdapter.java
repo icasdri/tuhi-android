@@ -2,6 +2,7 @@ package me.tonyduco.tuhi.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         historyDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", NOTE_ITEM.getNoteId());
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView date;
         public TextView title;
 
@@ -39,6 +40,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             date = (TextView) v.findViewById(R.id.history_date);
             title = (TextView) v.findViewById(R.id.history_title);
         }
+
     }
 
     @Override
@@ -51,17 +53,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteContentItem noteContent = historyDataset.get(position);
-
         Date expiry = new Date(noteContent.getDateCreated() * 1000);
         holder.date.setText(expiry.toString());
-
         holder.title.setText(noteContent.getTitle());
-        holder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //DO STUFF HERE
-            }
-        });
+
     }
 
     @Override
