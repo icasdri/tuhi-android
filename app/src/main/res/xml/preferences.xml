@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="preferences">
-    <EditTextPreference android:title="Server Address"
-        android:key="server-hostname"
-        android:summary="Enter your server's host address"></EditTextPreference>
-    <PreferenceScreen
-    android:key="authenication-settings"
-    android:title="Authenication Settings">
-        <EditTextPreference android:title="Username"
-            android:key="server-username"
-            android:summary="Please enter your username"></EditTextPreference>
-        <EditTextPreference android:title="Password"
-            android:key="server-password"
-            android:summary="Please enter your password"></EditTextPreference>
-    </PreferenceScreen>
-    <CheckBoxPreference android:title="Sync with Server"
+
+    <SwitchPreference android:title="Sync"
         android:defaultValue="false"
-        android:summary="This option if selected will allow the application to sync with a Tuhi hosted server"
+        android:summary="Enable sync"
         android:key="server-sync" />
-    <ListPreference     android:title="Download Details"
-        android:summary="Select the kind of data that you would like to download"
-        android:key="downloadType"
-        android:defaultValue="1"
-        android:entries="@array/listArray"
-        android:entryValues="@array/listValues" />
+    <EditTextPreference android:title="Server Address"
+        android:summary="Enter your server's host address"
+        android:key="server-hostname" />
+
+    <EditTextPreference android:title="Auto Sync"
+        android:summary="Interval in seconds Tuhi will auto sync"
+        android:defaultValue="0"
+        android:key="server-hostname"
+        android:inputType="number" />
+
+    <EditTextPreference android:title="Auto Save Inactive"
+        android:summary="Interval in seconds Tuhi will auto save after inactivity"
+        android:defaultValue="10"
+        android:key="server-hostname"
+        android:inputType="number" />
+
+    <EditTextPreference android:title="Auto Save Continuous"
+        android:summary="Interval in seconds Tuhi will auto sync during continuous editing"
+        android:defaultValue="10"
+        android:key="server-hostname"
+        android:inputType="number" />
+
 </PreferenceScreen>

@@ -28,6 +28,6 @@ tools:context="me.tonyduco.tuhi.activity.HistoryFragment">
         app:recyclerClipToPadding="false"
         app:recyclerPadding="16dp"
         android:layout_below="@+id/history_toolbar"
-        app:scrollbarStyle="insideInset"/>
+        app:scrollbarStyle="insideInset" />
 
 </RelativeLayout>

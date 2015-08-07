@@ -56,7 +56,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         Date expiry = new Date(noteContent.getDateCreated() * 1000);
         holder.date.setText(expiry.toString());
         holder.title.setText(noteContent.getTitle());
-
     }
 
     @Override

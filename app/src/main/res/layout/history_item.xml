@@ -1,27 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip" >
+    android:padding="6dip"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true">
 
-
-    <TextView
-        android:id="@+id/history_title"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:ellipsize="marquee"
-        android:layout_alignWithParentIfMissing="true"
-        android:singleLine="true"
-        android:text="Note Title"
-        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/history_date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/history_title"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
@@ -29,4 +19,17 @@
         android:text="Date"
         android:textSize="16sp" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/history_title"
+        android:layout_width="fill_parent"
+        android:layout_height="26dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/history_date"
+        android:ellipsize="marquee"
+        android:layout_alignWithParentIfMissing="true"
+        android:singleLine="true"
+        android:text="Note Title"
+        android:textSize="12sp" />
+
+</LinearLayout>

@@ -52,6 +52,7 @@ public class HistoryActivity extends ActionBarActivity  implements RecyclerItemC
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
 
+
     }
 
     @Override
