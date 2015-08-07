@@ -46,7 +46,6 @@ public class HomeFragment extends Fragment {
         mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.note_view);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        fab.attachToRecyclerView(mRecyclerView.getRecyclerView());
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
