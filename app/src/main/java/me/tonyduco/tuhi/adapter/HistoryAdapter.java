@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
@@ -50,8 +51,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteContentItem noteContent = historyDataset.get(position);
-        holder.date.setText(String.valueOf(noteContent.getDateCreated()));
-        holder.title.setText(noteContent.getContentPreview());
+
+        Date expiry = new Date(noteContent.getDateCreated() * 1000);
+        holder.date.setText(expiry.toString());
+
+        holder.title.setText(noteContent.getTitle());
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
