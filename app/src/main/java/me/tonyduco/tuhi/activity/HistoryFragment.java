@@ -1,7 +1,7 @@
 package me.tonyduco.tuhi.activity;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,26 +21,8 @@ public class HistoryFragment extends Fragment {
     private HistoryAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-
     public HistoryFragment() {
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_history, container, false);
-        mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.history_view);
-
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-
-        mAdapter = new HistoryAdapter(getActivity());
-        mRecyclerView.setAdapter(mAdapter);
-
-        return rootView;
-
+        // Required empty public constructor
     }
 
     @Override
@@ -50,8 +32,32 @@ public class HistoryFragment extends Fragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_history, container, false);
+
+        mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.history_view);
+
+
+
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        mLayoutManager = new LinearLayoutManager(getActivity());
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new HistoryAdapter(getActivity());
+        mRecyclerView.setAdapter(mAdapter);
+
+
+
+        return rootView;
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package me.tonyduco.tuhi.activity;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,7 +21,7 @@ public class HistoryActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
 
-     //   getFragmentManager().beginTransaction().replace(android.R.id.content, new HistoryFragment()).commit();
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new HistoryFragment()).commit();
 
         setContentView(R.layout.fragment_history);
 
@@ -41,11 +43,6 @@ public class HistoryActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 }
