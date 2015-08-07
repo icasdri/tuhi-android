@@ -17,10 +17,6 @@ import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 
 public class HistoryFragment extends Fragment {
 
-    private SuperRecyclerView mRecyclerView;
-    private HistoryAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
     public HistoryFragment() {
         // Required empty public constructor
     }
@@ -37,27 +33,13 @@ public class HistoryFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
 
-        mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.history_view);
-
-
-
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        mLayoutManager = new LinearLayoutManager(getActivity());
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new HistoryAdapter(getActivity());
-        mRecyclerView.setAdapter(mAdapter);
-
-
-
         return rootView;
     }
+
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
     }
 
     @Override
