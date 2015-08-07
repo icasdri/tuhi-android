@@ -50,9 +50,14 @@ public class HistoryActivity extends ActionBarActivity {
         mAdapter = new HistoryAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        //mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
 
-
+                    }
+                })
+        );
     }
 
     @Override

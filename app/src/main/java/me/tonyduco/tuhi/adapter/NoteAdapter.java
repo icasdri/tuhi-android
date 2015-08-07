@@ -40,16 +40,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
 
-    public void openNote(NoteItem note){
-        Intent i = new Intent(activity, NoteActivity.class);
-        i.putExtra("NOTE_ITEM", note);
-        activity.startActivity(i);
-
-        //Use code below to reset view
-        //notifyItemRemoved(position);
-
-    }
-
     @Override
     public NoteAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, parent, false);
@@ -61,12 +51,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteItem note = noteDataset.get(position);
         holder.title.setText(note.getContent().getTitle());
-//        holder.title.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openNote(note);
-//            }
-//        });
         holder.data.setText(note.getContent().getContentPreview());
     }
 
@@ -74,6 +58,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         noteDataset = NoteItem.find(NoteItem.class, "deleted = ?", "0");
     }
 
+    public NoteItem getNote(int position){
+        return noteDataset.get(position);
+    }
     @Override
     public int getItemCount(){
             return noteDataset.size();

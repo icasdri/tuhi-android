@@ -20,6 +20,7 @@ import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.adapter.NoteAdapter;
 import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
+import me.tonyduco.tuhi.model.NoteItem;
 
 public class HomeFragment extends Fragment {
 
@@ -81,12 +82,18 @@ public class HomeFragment extends Fragment {
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Log.d("TUHI", "TESING AGAIN");
+                        openNote(mAdapter.getNote(position));
                     }
                 })
         );
 
         return rootView;
+    }
+
+    public void openNote(NoteItem note){
+        Intent i = new Intent(getActivity(), NoteActivity.class);
+        i.putExtra("NOTE_ITEM", note);
+        getActivity().startActivity(i);
     }
 
     @Override
