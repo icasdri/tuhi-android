@@ -61,12 +61,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteItem note = noteDataset.get(position);
         holder.title.setText(note.getContent().getTitle());
-        holder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openNote(note);
-            }
-        });
+//        holder.title.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openNote(note);
+//            }
+//        });
         holder.data.setText(note.getContent().getContentPreview());
     }
 

@@ -18,7 +18,7 @@ import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
 import me.tonyduco.tuhi.model.NoteItem;
 
-public class HistoryActivity extends ActionBarActivity  implements RecyclerItemClickListener.OnItemClickListener {
+public class HistoryActivity extends ActionBarActivity {
 
     public static NoteItem NOTE_ITEM;
     private Toolbar mToolbar;
@@ -50,19 +50,9 @@ public class HistoryActivity extends ActionBarActivity  implements RecyclerItemC
         mAdapter = new HistoryAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
+        //mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, this));
 
 
-    }
-
-    @Override
-    public void onItemClick(View childView, int position) {
-        Log.d("TUHI", "ASDFasdfdsafadsfdasfadsf");
-    }
-
-    @Override
-    public void onItemLongPress(View childView, int position) {
-        Log.d("TUHI", "Long press");
     }
 
     @Override
