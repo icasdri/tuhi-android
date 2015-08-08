@@ -2,6 +2,7 @@ package me.tonyduco.tuhi.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.model.NoteEnum;
 import me.tonyduco.tuhi.model.NoteItem;
 
-/**
- * Created by tony on 7/10/15.
- */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private Activity activity;
-    private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "deleted = ?", "0");
+   // private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteEnum.PLAINTEXT));
+    private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "type = ?", "0");
+
     public NoteAdapter(Activity activity){
         super();
         this.activity = activity;
@@ -31,7 +32,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             super(v);
             title = (TextView) v.findViewById(R.id.note_title);
             data = (TextView) v.findViewById(R.id.note_data);
-
         }
     }
 
@@ -51,12 +51,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
     public void refreshDataset(){
-        noteDataset = NoteItem.find(NoteItem.class, "deleted = ?", "0");
+        //noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteEnum.PLAINTEXT));
+        noteDataset = NoteItem.find(NoteItem.class, "type = ?", "0");
+        Log.d("Tuhi", "NoteEnum === " + NoteEnum.PLAINTEXT);
     }
 
     public NoteItem getNote(int position){
         return noteDataset.get(position);
     }
+
     @Override
     public int getItemCount(){
             return noteDataset.size();

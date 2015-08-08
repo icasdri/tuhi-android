@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.settings.SettingsActivity;
 import me.tonyduco.tuhi.adapter.FragmentDrawer;
+import me.tonyduco.tuhi.model.NoteEnum;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -59,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 //            NoteItem testName = new NoteItem("asdf");
 //            NoteContentItem testContent = new NoteContentItem(testName.getNoteId(), "asdfsadf");
 //            testName.save();
-//            testContent.save();
+//            testContent.save();\
             return true;
         }
 

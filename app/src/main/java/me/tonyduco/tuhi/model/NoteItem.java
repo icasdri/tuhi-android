@@ -8,18 +8,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Tony on 7/10/2015.
- */
 public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
 
     private String noteid;
-    private String deleted;
+    private String type;
     private long date_modified;
 
-    public NoteItem(String note_id, String deleted, long date_modified){
+    public NoteItem(String note_id, String type, long date_modified){
         this.noteid = note_id;
-        this.deleted = deleted;
+        this.type = type;
         this.date_modified = date_modified;
     }
     public NoteItem(){
@@ -40,8 +37,8 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         return noteContentDataset.get(0);
     }
 
-    public String getDeleted(){
-        return deleted;
+    public String getType(){
+        return type;
     }
 
     public long getDateModified(){
@@ -52,8 +49,8 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         this.noteid = note_id;
     }
 
-    public void setDeleted(String deleted){
-        this.deleted = deleted;
+    public void setType(String type){
+        this.type = type;
     }
 
     public void setDateModified(long date_modified){
