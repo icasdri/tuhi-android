@@ -26,6 +26,10 @@
         android:minLines="10"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        android:overScrollMode="always"/>
+        android:overScrollMode="always"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:layout_marginBottom="-7dp"
+        android:layout_marginTop="-6dp"/>
 
 </RelativeLayout>
