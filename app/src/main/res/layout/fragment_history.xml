@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-tools:context="me.tonyduco.tuhi.activity.HistoryFragment">
+tools:context="me.tonyduco.tuhi.activity.history.HistoryFragment">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"

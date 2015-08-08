@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="me.tonyduco.tuhi.activity.NewNoteFragment"
+    android:layout_height="match_parent" tools:context="me.tonyduco.tuhi.activity.newnote.NewNoteFragment"
     android:id="@+id/newnote_layout"
     android:orientation="vertical">
     <EditText android:layout_width="match_parent"

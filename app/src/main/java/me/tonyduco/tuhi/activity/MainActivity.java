@@ -14,6 +14,7 @@ import android.view.View;
 import android.support.v4.widget.DrawerLayout;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.settings.SettingsActivity;
 import me.tonyduco.tuhi.adapter.FragmentDrawer;
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {

@@ -1,4 +1,4 @@
-package me.tonyduco.tuhi.activity;
+package me.tonyduco.tuhi.activity.settings;
 
 import android.app.Activity;
 import android.net.Uri;

@@ -1,4 +1,4 @@
-package me.tonyduco.tuhi.activity;
+package me.tonyduco.tuhi.activity.note;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,12 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.history.HistoryActivity;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 

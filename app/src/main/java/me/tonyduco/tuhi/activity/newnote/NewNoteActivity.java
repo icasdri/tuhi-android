@@ -1,4 +1,4 @@
-package me.tonyduco.tuhi.activity;
+package me.tonyduco.tuhi.activity.newnote;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

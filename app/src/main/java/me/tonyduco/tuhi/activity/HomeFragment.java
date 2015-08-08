@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,8 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.melnykov.fab.FloatingActionButton;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.newnote.NewNoteActivity;
+import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.adapter.NoteAdapter;
 import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 import me.tonyduco.tuhi.listener.RecyclerItemClickListener;

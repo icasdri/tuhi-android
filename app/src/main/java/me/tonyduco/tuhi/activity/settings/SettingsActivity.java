@@ -1,17 +1,11 @@
-package me.tonyduco.tuhi.activity;
+package me.tonyduco.tuhi.activity.settings;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import me.tonyduco.tuhi.R;
 

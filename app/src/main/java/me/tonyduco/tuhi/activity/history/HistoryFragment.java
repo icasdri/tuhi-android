@@ -1,4 +1,4 @@
-package me.tonyduco.tuhi.activity;
+package me.tonyduco.tuhi.activity.history;
 
 import android.app.Activity;
 import android.app.Fragment;
