@@ -11,8 +11,4 @@ public enum NoteEnum {
         this.type = type;
     }
 
-    public int getType(){
-        return this.type;
-    }
-
 }
