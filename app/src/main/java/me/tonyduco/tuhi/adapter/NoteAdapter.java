@@ -11,13 +11,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
-import me.tonyduco.tuhi.model.NoteEnum;
 import me.tonyduco.tuhi.model.NoteItem;
+import me.tonyduco.tuhi.model.NoteType;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private Activity activity;
-   // private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteEnum.PLAINTEXT));
-    private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "type = ?", "0");
+
+    private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.PLAINTEXT));
 
     public NoteAdapter(Activity activity){
         super();
@@ -51,9 +51,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
     public void refreshDataset(){
-        //noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteEnum.PLAINTEXT));
-        noteDataset = NoteItem.find(NoteItem.class, "type = ?", "0");
-        Log.d("Tuhi", "NoteEnum === " + NoteEnum.PLAINTEXT);
+        noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.PLAINTEXT));
     }
 
     public NoteItem getNote(int position){

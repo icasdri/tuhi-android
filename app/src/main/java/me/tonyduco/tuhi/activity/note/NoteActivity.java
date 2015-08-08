@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -16,8 +15,8 @@ import java.util.List;
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.history.HistoryActivity;
 import me.tonyduco.tuhi.model.NoteContentItem;
-import me.tonyduco.tuhi.model.NoteEnum;
 import me.tonyduco.tuhi.model.NoteItem;
+import me.tonyduco.tuhi.model.NoteType;
 
 /**
  * Created by tony on 7/12/15.
@@ -70,9 +69,10 @@ public class NoteActivity extends ActionBarActivity {
         }
         if(id == R.id.action_delete){
             List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "noteid = ?", NOTE_ITEM.getNoteId());
-            noteDataset.get(0).setType("1");
+            noteDataset.get(0).setType(String.valueOf(NoteType.DELETED));
             noteDataset.get(0).save();
             NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+            newContent.setType(NoteType.DELETED);
             newContent.save();
             onBackPressed();
             return true;

@@ -28,12 +28,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
     }
 
     public NoteContentItem getContent(){
-        List<NoteContentItem> noteContentDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", noteid);
-        Collections.sort(noteContentDataset, new Comparator<NoteContentItem>(){
-            public int compare(NoteContentItem a, NoteContentItem b){
-                return b.getDateCreated().compareTo(a.getDateCreated());
-            }
-        });
+        List<NoteContentItem> noteContentDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", new String[] {noteid}, null, "datecreated DESC", "1");
         return noteContentDataset.get(0);
     }
 
