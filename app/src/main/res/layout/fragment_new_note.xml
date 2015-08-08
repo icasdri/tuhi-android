@@ -8,5 +8,9 @@
         android:gravity="top|left"
         android:inputType="textMultiLine"
         android:text=""
-        android:id="@+id/newnote_content"/>
+        android:id="@+id/newnote_content"
+        android:minLines="10"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:overScrollMode="always"/>
 </LinearLayout>

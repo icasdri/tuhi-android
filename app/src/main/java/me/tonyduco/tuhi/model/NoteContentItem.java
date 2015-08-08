@@ -25,6 +25,7 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
         this.note = note;
         this.data = data;
         this.date_created = date_created;
+        this.type = 0;
     }
 
     public NoteContentItem(String note, String data){
