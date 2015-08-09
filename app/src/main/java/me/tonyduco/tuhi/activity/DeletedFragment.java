@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
+import com.malinskiy.superrecyclerview.swipe.SwipeItemManagerInterface;
+
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.adapter.DeletedAdapter;
@@ -46,6 +48,7 @@ public class DeletedFragment extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         mAdapter = new DeletedAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setMode(SwipeItemManagerInterface.Mode.Single);
 
         mRecyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -55,12 +58,11 @@ public class DeletedFragment extends Fragment {
             }
         });
 
-
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        openNote(mAdapter.getNote(position));
+                        mAdapter.remove(position);
                     }
                 })
         );
