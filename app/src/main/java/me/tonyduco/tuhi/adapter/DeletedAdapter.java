@@ -1,11 +1,12 @@
 package me.tonyduco.tuhi.adapter;
 
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
@@ -15,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
-import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 import me.tonyduco.tuhi.model.NoteType;
@@ -35,12 +35,14 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
         public TextView title;
         public TextView data;
         public Button deletedButton;
+        public RelativeLayout relativeLayout;
 
         public ViewHolder(View v){
             super(v);
             title = (TextView) v.findViewById(R.id.note_title);
             data = (TextView) v.findViewById(R.id.note_data);
             deletedButton = (Button) itemView.findViewById(R.id.delete);
+            relativeLayout = (RelativeLayout) v.findViewById(R.id.deleted_info);
         }
     }
 
@@ -48,12 +50,19 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.deleted_item, parent, false);
-        ViewHolder vh = new ViewHolder(v);
+        final ViewHolder vh = new ViewHolder(v);
 
         SwipeLayout swipeLayout = vh.swipeLayout;
         swipeLayout.setDragEdge(SwipeLayout.DragEdge.Right);
         swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
-        
+
+        vh.deletedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                remove(vh.getPosition());
+            }
+        });
+
         return vh;
     }
 
