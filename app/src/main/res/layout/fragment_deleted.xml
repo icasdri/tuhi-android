@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="me.tonyduco.tuhi.activity.TrashFragment">
+    tools:context="me.tonyduco.tuhi.activity.DeletedFragment">
 
     <com.malinskiy.superrecyclerview.SuperRecyclerView
-        android:id="@+id/trash_view"
+        android:id="@+id/deleted_view"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

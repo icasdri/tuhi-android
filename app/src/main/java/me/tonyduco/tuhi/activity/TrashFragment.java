@@ -24,7 +24,7 @@ public class TrashFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_trash, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_deleted, container, false);
 
 
         // Inflate the layout for this fragment

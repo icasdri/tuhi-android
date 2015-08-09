@@ -5,7 +5,7 @@
     android:background="?android:attr/selectableItemBackground"
     android:focusable="true"
     android:clickable="true">
-    
+
     <TextView
         android:id="@+id/title"
         android:layout_width="fill_parent"

@@ -81,8 +81,8 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_home);
                 break;
             case 1:
-                fragment = new TrashFragment();
-                title = "Trash";
+                fragment = new DeletedFragment();
+                title = "Deleted";
                 break;
             case 2:
                 skip = true;
