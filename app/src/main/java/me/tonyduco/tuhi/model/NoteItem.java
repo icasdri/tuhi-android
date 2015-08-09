@@ -29,6 +29,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
 
     public NoteContentItem getContent(){
         List<NoteContentItem> noteContentDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", new String[] {noteid}, null, "datecreated DESC", "1");
+        this.type = String.valueOf(noteContentDataset.get(0).getType());
         return noteContentDataset.get(0);
     }
 

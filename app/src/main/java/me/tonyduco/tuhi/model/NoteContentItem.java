@@ -1,8 +1,11 @@
 package me.tonyduco.tuhi.model;
 
+import android.util.Log;
+
 import com.orm.SugarRecord;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -87,6 +90,8 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> {
 
     public void setType(int type){
         this.type = type;
+        List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "noteid = ?", new String[] { note }, null, null, "1");
+        noteDataset.get(0).setType(String.valueOf(type));
+        noteDataset.get(0).save();
     }
-
 }

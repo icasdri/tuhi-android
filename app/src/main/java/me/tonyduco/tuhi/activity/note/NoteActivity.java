@@ -68,9 +68,6 @@ public class NoteActivity extends ActionBarActivity {
             return true;
         }
         if(id == R.id.action_delete){
-            List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "noteid = ?", NOTE_ITEM.getNoteId());
-            noteDataset.get(0).setType(String.valueOf(NoteType.DELETED));
-            noteDataset.get(0).save();
             NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
             newContent.setType(NoteType.DELETED);
             newContent.save();
