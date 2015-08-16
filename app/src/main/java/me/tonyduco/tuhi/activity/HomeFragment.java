@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
     private SuperRecyclerView mRecyclerView;
     private NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private View rootView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -43,17 +44,9 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
         mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.note_view);
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), NewNoteActivity.class);
-                startActivity(i);
-            }
-        });
 
 
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -96,6 +89,18 @@ public class HomeFragment extends Fragment {
         getActivity().startActivity(i);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), NewNoteActivity.class);
+                startActivity(i);
+            }
+        });
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

@@ -1,5 +1,6 @@
 package me.tonyduco.tuhi.activity.history;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,8 @@ import android.view.View;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.MainActivity;
+import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.adapter.HistoryAdapter;
 import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
@@ -69,6 +72,12 @@ public class HistoryActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (item.getItemId() == android.R.id.home) {
+            Intent i = new Intent(getApplicationContext(), NoteActivity.class);
+            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            startActivity(i);
+            return true;
+        }else
         return super.onOptionsItemSelected(item);
     }
 }
