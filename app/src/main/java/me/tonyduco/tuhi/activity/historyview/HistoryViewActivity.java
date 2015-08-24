@@ -7,8 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
+
+import java.util.Date;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.note.NoteActivity;
@@ -19,6 +22,7 @@ public class HistoryViewActivity extends ActionBarActivity {
 
     public static NoteContentItem NOTE_CONTENT;
     private Toolbar mToolbar;
+    EditText textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,13 @@ public class HistoryViewActivity extends ActionBarActivity {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
+
+
+        textView = (EditText) findViewById(R.id.historyview_text_view);
+
+        Date expiry = new Date(NOTE_CONTENT.getDateCreated() * 1000);
+        mToolbar.setTitle(expiry.toString());
+        textView.setText(NOTE_CONTENT.getData().toString());
 
     }
 

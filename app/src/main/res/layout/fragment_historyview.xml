@@ -8,7 +8,7 @@
         android:gravity="top|left"
         android:inputType="textMultiLine"
         android:text=""
-        android:id="@+id/note_text_view"
+        android:id="@+id/historyview_text_view"
         android:minLines="10"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
