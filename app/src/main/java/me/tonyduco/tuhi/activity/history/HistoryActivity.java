@@ -73,7 +73,7 @@ public class HistoryActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
-            Intent i = new Intent(getApplicationContext(), NoteActivity.class);
+            Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
             i.putExtra("NOTE_ITEM", NOTE_ITEM);
             startActivity(i);
             return true;

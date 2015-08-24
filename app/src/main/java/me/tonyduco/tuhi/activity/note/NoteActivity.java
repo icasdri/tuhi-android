@@ -13,6 +13,7 @@ import android.widget.EditText;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.MainActivity;
 import me.tonyduco.tuhi.activity.history.HistoryActivity;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
@@ -64,7 +65,9 @@ public class NoteActivity extends ActionBarActivity {
         if (item.getItemId() == android.R.id.home) {
             NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
             newContent.save();
-            onBackPressed();
+//            onBackPressed();
+            Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
+            startActivity(i);
             return true;
         }
         if(id == R.id.action_delete){
