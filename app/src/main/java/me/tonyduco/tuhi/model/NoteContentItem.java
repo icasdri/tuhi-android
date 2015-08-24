@@ -4,14 +4,12 @@ import android.util.Log;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Tony on 7/10/2015.
- */
-public class NoteContentItem extends SugarRecord<NoteContentItem> {
+public class NoteContentItem extends SugarRecord<NoteContentItem> implements Serializable {
     private String note_content_id;
     private String note;
     private String data;

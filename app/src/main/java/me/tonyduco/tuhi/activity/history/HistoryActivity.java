@@ -15,10 +15,12 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.MainActivity;
+import me.tonyduco.tuhi.activity.historyview.HistoryViewActivity;
 import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.adapter.HistoryAdapter;
 import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
+import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 
 public class HistoryActivity extends ActionBarActivity {
@@ -57,10 +59,17 @@ public class HistoryActivity extends ActionBarActivity {
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-
+                        openHistory(mAdapter.getNoteContent(position));
                     }
                 })
         );
+    }
+
+
+    public void openHistory(NoteContentItem noteContent){
+        Intent i = new Intent(getParent(), HistoryViewActivity.class);
+        i.putExtra("NOTE_CONTENT", noteContent);
+        startActivity(i);
     }
 
     @Override

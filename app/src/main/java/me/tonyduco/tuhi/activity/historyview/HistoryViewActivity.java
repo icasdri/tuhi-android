@@ -12,18 +12,19 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.note.NoteActivity;
+import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 
 public class HistoryViewActivity extends ActionBarActivity {
 
-    public static NoteItem NOTE_ITEM;
+    public static NoteContentItem NOTE_CONTENT;
     private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
+        NOTE_CONTENT = (NoteContentItem) getIntent().getSerializableExtra("NOTE_CONTENT");
 
         setContentView(R.layout.fragment_historyview);
 
@@ -44,9 +45,9 @@ public class HistoryViewActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
-            Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
-            i.putExtra("NOTE_ITEM", NOTE_ITEM);
-            startActivity(i);
+//            Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
+//            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+//            startActivity(i);
             return true;
         }else
             return super.onOptionsItemSelected(item);

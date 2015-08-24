@@ -15,9 +15,6 @@ import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 
-/**
- * Created by Tony on 8/5/2015.
- */
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
     private Activity activity;
@@ -61,6 +58,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public int getItemCount(){
         return historyDataset.size();
+    }
+
+    public NoteContentItem getNoteContent(int position){
+       return historyDataset.get(position);
     }
 
 
