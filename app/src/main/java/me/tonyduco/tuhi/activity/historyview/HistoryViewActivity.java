@@ -30,8 +30,9 @@ public class HistoryViewActivity extends ActionBarActivity {
 
         NOTE_CONTENT = (NoteContentItem) getIntent().getSerializableExtra("NOTE_CONTENT");
 
-        setContentView(R.layout.fragment_historyview);
+//        setContentView(R.layout.fragment_historyview);
 
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new HistoryViewFragment()).commit();
         mToolbar = (Toolbar) findViewById(R.id.historyview_toolbar);
 
         setSupportActionBar(mToolbar);

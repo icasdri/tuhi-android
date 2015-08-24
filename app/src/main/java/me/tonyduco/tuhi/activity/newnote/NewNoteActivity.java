@@ -14,9 +14,6 @@ import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 
-/**
- * Created by tony on 7/16/15.
- */
 public class NewNoteActivity extends ActionBarActivity {
 
     EditText data;
