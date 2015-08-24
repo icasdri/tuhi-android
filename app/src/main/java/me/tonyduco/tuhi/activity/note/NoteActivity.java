@@ -10,8 +10,6 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import java.util.List;
-
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.MainActivity;
 import me.tonyduco.tuhi.activity.history.HistoryActivity;
@@ -19,9 +17,6 @@ import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 import me.tonyduco.tuhi.model.NoteType;
 
-/**
- * Created by tony on 7/12/15.
- */
 public class NoteActivity extends ActionBarActivity {
 
     public static NoteItem NOTE_ITEM;
@@ -65,7 +60,7 @@ public class NoteActivity extends ActionBarActivity {
         if (item.getItemId() == android.R.id.home) {
             NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
             newContent.save();
-//            onBackPressed();
+//            onBackPressed(); Used to emulate back button (deprecated to fix HistoryActivity)
             Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
             startActivity(i);
             return true;

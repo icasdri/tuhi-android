@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="me.tonyduco.tuhi.activity.note.HistoryFragment">
+
+    <EditText android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:editable="false"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:text=""
+        android:id="@+id/note_text_view"
+        android:minLines="10"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:overScrollMode="always"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:layout_marginBottom="-7dp"
+        android:layout_marginTop="-6dp"/>
+
+</RelativeLayout>
