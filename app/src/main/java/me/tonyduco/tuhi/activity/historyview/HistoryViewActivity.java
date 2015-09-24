@@ -3,13 +3,11 @@ package me.tonyduco.tuhi.activity.historyview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import java.util.Date;
 
@@ -30,9 +28,8 @@ public class HistoryViewActivity extends ActionBarActivity {
 
         NOTE_CONTENT = (NoteContentItem) getIntent().getSerializableExtra("NOTE_CONTENT");
 
-//        setContentView(R.layout.fragment_historyview);
-
         getFragmentManager().beginTransaction().replace(android.R.id.content, new HistoryViewFragment()).commit();
+        setContentView(R.layout.fragment_historyview);
         mToolbar = (Toolbar) findViewById(R.id.historyview_toolbar);
 
         setSupportActionBar(mToolbar);

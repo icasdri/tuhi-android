@@ -66,6 +66,7 @@ public class HistoryActivity extends ActionBarActivity {
     }
 
 
+
     public void openHistory(NoteContentItem noteContent){
         Intent i = new Intent(this, HistoryViewActivity.class);
         i.putExtra("NOTE_CONTENT", noteContent);
