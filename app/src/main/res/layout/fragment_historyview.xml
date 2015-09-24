@@ -23,6 +23,7 @@
         android:inputType="textMultiLine"
         android:text=""
         android:id="@+id/historyview_text_view"
+        android:layout_below="@+id/historyview_toolbar"
         android:minLines="10"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
