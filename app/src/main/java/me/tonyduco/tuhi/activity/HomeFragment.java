@@ -64,12 +64,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mRecyclerView.setupMoreListener(new OnMoreListener() {
-            @Override
-            public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
-                // Fetch more from Api or DB
-            }
-        }, 10);
+//        mRecyclerView.setupMoreListener(new OnMoreListener() {
+//            @Override
+//            public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
+//                // Fetch more from Api or DB
+//            }
+//        }, 10);
 
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
