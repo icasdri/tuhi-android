@@ -12,6 +12,7 @@ import android.widget.EditText;
 import java.util.Date;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.history.HistoryActivity;
 import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
@@ -19,6 +20,7 @@ import me.tonyduco.tuhi.model.NoteItem;
 public class HistoryViewActivity extends ActionBarActivity {
 
     public static NoteContentItem NOTE_CONTENT;
+    public static NoteItem NOTE_ITEM;
     private Toolbar mToolbar;
     EditText textView;
 
@@ -27,6 +29,7 @@ public class HistoryViewActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         NOTE_CONTENT = (NoteContentItem) getIntent().getSerializableExtra("NOTE_CONTENT");
+        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new HistoryViewFragment()).commit();
         setContentView(R.layout.fragment_historyview);
@@ -54,6 +57,9 @@ public class HistoryViewActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
+            Intent i = new Intent(this, HistoryActivity.class);
+            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            startActivity(i);
 //            Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
 //            i.putExtra("NOTE_ITEM", NOTE_ITEM);
 //            startActivity(i);

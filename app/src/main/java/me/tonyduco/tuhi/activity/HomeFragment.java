@@ -64,6 +64,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        //Causes lag when used incorrectly...
+
 //        mRecyclerView.setupMoreListener(new OnMoreListener() {
 //            @Override
 //            public void onMoreAsked(int numberOfItems, int numberBeforeMore, int currentItemPos) {
