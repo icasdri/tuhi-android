@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -51,8 +52,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteContentItem noteContent = historyDataset.get(position);
         Date expiry = new Date(noteContent.getDateCreated() * 1000);
-        holder.date.setText(expiry.toString());
+        holder.date.setText(formatDate(expiry));
         holder.title.setText(noteContent.getTitle());
+    }
+
+    public String formatDate(Date date){
+        return new SimpleDateFormat("MMM d, hh:mm:ss aa").format(date);
     }
 
     @Override
