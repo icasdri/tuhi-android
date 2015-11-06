@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
@@ -15,13 +16,16 @@ import me.tonyduco.tuhi.model.NoteItem;
 import me.tonyduco.tuhi.model.NoteType;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
+    
     private Activity activity;
 
-    private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.PLAINTEXT));
+    private List<NoteItem> noteDataset;
+
 
     public NoteAdapter(Activity activity){
         super();
         this.activity = activity;
+        refreshDataset();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -52,6 +56,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     public void refreshDataset(){
         noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.PLAINTEXT));
+        Collections.reverse(noteDataset);
     }
 
     public NoteItem getNote(int position){
