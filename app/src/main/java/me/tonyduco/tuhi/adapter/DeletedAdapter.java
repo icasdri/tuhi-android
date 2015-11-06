@@ -96,7 +96,6 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
     }
 
     public void remove(int position) {
-
         NoteContentItem newContent = new NoteContentItem(noteDataset.get(position).getNoteId(), noteDataset.get(position).getContent().getNote());
         newContent.setType(NoteType.PERMANENTLY_DELETED);
         newContent.save();

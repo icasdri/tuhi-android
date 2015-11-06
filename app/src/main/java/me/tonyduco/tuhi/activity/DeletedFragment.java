@@ -51,21 +51,6 @@ public class DeletedFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setMode(SwipeItemManagerInterface.Mode.Single);
 
-        mRecyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mAdapter.refreshDataset();
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Log.d("Tuhi", "Clickedddd");
-            }
-        }));
-
         return rootView;
     }
 
