@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -37,6 +38,7 @@ public class NoteActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         textView = (EditText) findViewById(R.id.note_text_view);
+        textView.setOnClickListener(editTextClickListener);
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(textView, InputMethodManager.SHOW_IMPLICIT);
@@ -45,6 +47,20 @@ public class NoteActivity extends ActionBarActivity {
         textView.setText(NOTE_ITEM.getContent().getData().toString());
 
     }
+
+    View.OnClickListener editTextClickListener = new View.OnClickListener()
+
+    {
+
+        public void onClick(View v)
+        {
+            if (v.getId() == textView.getId())
+            {
+                textView.setCursorVisible(true);
+            }
+
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
