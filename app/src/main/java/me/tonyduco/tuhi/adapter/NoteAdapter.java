@@ -16,7 +16,7 @@ import me.tonyduco.tuhi.model.NoteItem;
 import me.tonyduco.tuhi.model.NoteType;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
-    
+
     private Activity activity;
 
     private List<NoteItem> noteDataset;

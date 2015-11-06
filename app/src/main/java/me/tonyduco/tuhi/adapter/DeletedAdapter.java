@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
 import com.malinskiy.superrecyclerview.swipe.SwipeLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
         final NoteItem note = noteDataset.get(position);
         Date expiry = new Date(note.getContent().getDateCreated() * 1000);
         holder.title.setText(note.getContent().getTitle());
-        holder.data.setText(expiry.toString());
+        holder.data.setText(formatDate(expiry));
     }
 
     public void refreshDataset(){
@@ -85,6 +86,10 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
     @Override
     public int getItemCount(){
             return noteDataset.size();
+    }
+
+    public String formatDate(Date date){
+        return new SimpleDateFormat("MMM d, hh:mm:ss aa").format(date);
     }
 
     public void remove(int position) {
