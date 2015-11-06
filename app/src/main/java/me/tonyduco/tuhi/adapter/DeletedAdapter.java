@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
 import com.malinskiy.superrecyclerview.swipe.SwipeLayout;
 
@@ -102,6 +103,12 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
         closeItem(position);
         refreshDataset();
         notifyDataSetChanged();
+        if(position == 0){
+            TextView mEmptyView = (TextView) activity.findViewById(R.id.empty_deleted_view);
+            SuperRecyclerView mRecyclerView = (SuperRecyclerView) activity.findViewById(R.id.deleted_view);
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
     }
 
 }
