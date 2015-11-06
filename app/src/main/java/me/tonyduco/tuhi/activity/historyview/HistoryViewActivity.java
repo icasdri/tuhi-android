@@ -60,9 +60,13 @@ public class HistoryViewActivity extends ActionBarActivity {
             Intent i = new Intent(this, HistoryActivity.class);
             i.putExtra("NOTE_ITEM", NOTE_ITEM);
             startActivity(i);
-//            Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
-//            i.putExtra("NOTE_ITEM", NOTE_ITEM);
-//            startActivity(i);
+            return true;
+        }else if(id == R.id.action_restore){
+            NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), NOTE_CONTENT.getData());
+            newContent.save();
+            Intent i = new Intent(getApplicationContext(), NoteActivity.class);
+            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            startActivity(i);
             return true;
         }else
             return super.onOptionsItemSelected(item);

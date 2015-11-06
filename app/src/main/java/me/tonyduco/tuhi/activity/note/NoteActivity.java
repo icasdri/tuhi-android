@@ -58,8 +58,10 @@ public class NoteActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
-            NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+            if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
+                NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
             newContent.save();
+            }
 //            onBackPressed(); Used to emulate back button (deprecated to fix HistoryActivity)
             Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
             startActivity(i);

@@ -4,7 +4,7 @@
     tools:context="me.tonyduco.tuhi.activity.historyview.HistoryView">
 
     <item
-        android:id="@+id/action_add"
+        android:id="@+id/action_restore"
         android:title="@string/action_add"
         android:orderInCategory="100"
         android:icon="@drawable/ic_history_white_24dp"
