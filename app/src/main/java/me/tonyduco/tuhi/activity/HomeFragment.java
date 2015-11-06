@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.malinskiy.superrecyclerview.OnMoreListener;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment {
 
 
     private SuperRecyclerView mRecyclerView;
+    private TextView mEmptyView;
     private NoteAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private View rootView;
@@ -45,7 +47,10 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+
         mRecyclerView = (SuperRecyclerView) rootView.findViewById(R.id.note_view);
+        mEmptyView = (TextView) rootView.findViewById(R.id.empty_view);
 
 
 
@@ -65,6 +70,7 @@ public class HomeFragment extends Fragment {
         });
 
 
+
         //Causes lag when used incorrectly...
 
 //        mRecyclerView.setupMoreListener(new OnMoreListener() {
@@ -82,6 +88,14 @@ public class HomeFragment extends Fragment {
                     }
                 })
         );
+
+        if(mAdapter.getItemCount() == 0){
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }else{
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
+        }
 
         return rootView;
     }
@@ -119,5 +133,12 @@ public class HomeFragment extends Fragment {
         super.onResume();
         mAdapter.refreshDataset();
         mAdapter.notifyDataSetChanged();
+        if(mAdapter.getItemCount() == 0){
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        }else{
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
+        }
     }
 }

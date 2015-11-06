@@ -51,6 +51,8 @@ public class DeletedFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setMode(SwipeItemManagerInterface.Mode.Single);
 
+
+
         return rootView;
     }
 
