@@ -13,6 +13,7 @@ import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
 import com.malinskiy.superrecyclerview.swipe.SwipeLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -25,11 +26,12 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
 
     private Activity activity;
 
-    private List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.DELETED));
+    private List<NoteItem> noteDataset;
 
     public DeletedAdapter(Activity activity){
         super();
         this.activity = activity;
+        refreshDataset();
     }
 
     public class ViewHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
@@ -77,6 +79,7 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
 
     public void refreshDataset(){
         noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.DELETED));
+        Collections.reverse(noteDataset);
     }
 
     public NoteItem getNote(int position){
