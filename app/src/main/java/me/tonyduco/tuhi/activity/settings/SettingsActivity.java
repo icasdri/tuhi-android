@@ -2,6 +2,7 @@ package me.tonyduco.tuhi.activity.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.LinearLayout;
 
 import me.tonyduco.tuhi.R;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends ActionBarActivity {
 
 
     @Override
