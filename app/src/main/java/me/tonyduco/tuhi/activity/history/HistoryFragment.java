@@ -3,17 +3,11 @@ package me.tonyduco.tuhi.activity.history;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.malinskiy.superrecyclerview.SuperRecyclerView;
-
 import me.tonyduco.tuhi.R;
-import me.tonyduco.tuhi.adapter.HistoryAdapter;
-import me.tonyduco.tuhi.decoration.DividerItemDecoration;
 
 public class HistoryFragment extends Fragment {
 
