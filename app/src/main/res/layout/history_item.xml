@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
         android:gravity="center_vertical"
+        android:singleLine="true"
         android:text="Date"
         android:textSize="16sp" />
 
