@@ -4,10 +4,11 @@
 
     <SwitchPreference android:title="Sync"
         android:defaultValue="false"
-        android:summary="Enable sync"
+        android:summary="Enable sync (currently not functional)"
         android:key="server-sync" />
+
     <EditTextPreference android:title="Server Address"
-        android:summary="Enter your server's host address"
+        android:summary="Enter your server's host address to sync with"
         android:key="server-hostname" />
 
     <EditTextPreference android:title="Auto Sync"
@@ -16,16 +17,10 @@
         android:key="server-hostname"
         android:inputType="number" />
 
-    <EditTextPreference android:title="Auto Save Inactive"
-        android:summary="Interval in seconds Tuhi will auto save after inactivity"
-        android:defaultValue="10"
-        android:key="server-hostname"
-        android:inputType="number" />
-
-    <EditTextPreference android:title="Auto Save Continuous"
-        android:summary="Interval in seconds Tuhi will auto sync during continuous editing"
-        android:defaultValue="10"
-        android:key="server-hostname"
-        android:inputType="number" />
+    <!--<EditTextPreference android:title="Auto Save"-->
+        <!--android:summary="Interval in seconds Tuhi will auto save if there are changes"-->
+        <!--android:defaultValue="30"-->
+        <!--android:key="autosave"-->
+        <!--android:inputType="number" />-->
 
 </PreferenceScreen>

@@ -82,13 +82,8 @@ public class DeletedFragment extends Fragment {
         Intent i = new Intent(getActivity(), HistoryViewActivity.class);
         i.putExtra("NOTE_CONTENT", NOTE_ITEM.getContent());
         i.putExtra("NOTE_ITEM", NOTE_ITEM);
+        i.putExtra("CONTEXT", "DeletedFragment");
         startActivity(i);
-    }
-
-    public void openNote(NoteItem note){
-        Intent i = new Intent(getActivity(), NoteActivity.class);
-        i.putExtra("NOTE_ITEM", note);
-        getActivity().startActivity(i);
     }
 
     @Override

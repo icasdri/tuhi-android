@@ -81,6 +81,13 @@ public class HistoryActivity extends ActionBarActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
+        i.putExtra("NOTE_ITEM", NOTE_ITEM);
+        startActivity(i);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {

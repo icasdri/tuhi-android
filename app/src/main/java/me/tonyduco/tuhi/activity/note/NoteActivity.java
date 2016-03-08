@@ -2,9 +2,13 @@ package me.tonyduco.tuhi.activity.note;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +44,68 @@ public class NoteActivity extends ActionBarActivity {
 
         textView = (EditText) findViewById(R.id.note_text_view);
         textView.setOnClickListener(editTextClickListener);
+
+        //Autosave Functionality
+//        textView.addTextChangedListener(new TextWatcher() {
+//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//            long timeSinceLastChange = -1;
+//            Thread saveThread;
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if(timeSinceLastChange == -1){
+//                    if(saveThread == null){
+//                        saveThread = new Thread(){
+//                            @Override
+//                            public void run(){
+//                                try {
+//
+//                                    sleep(prefs.getInt("autosave", 30)*1000);
+//                                    if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
+//                                        NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+//                                        newContent.save();
+//                                        Toast.makeText(NoteActivity.this, "Note Auto-saved!", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }catch(InterruptedException ex){
+//                                }
+//                            }
+//                        };
+//                        saveThread.run();
+//                        timeSinceLastChange = System.currentTimeMillis() * 1000;
+//                    }
+//                }else if((System.currentTimeMillis() * 1000) - timeSinceLastChange >= prefs.getInt("autosave", 30)){
+//                    if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
+//                        saveThread = new Thread(){
+//                            @Override
+//                            public void run(){
+//                                try {
+//
+//                                    sleep(prefs.getInt("autosave", 30)*1000);
+//                                    if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
+//                                        NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+//                                        newContent.save();
+//                                        Toast.makeText(NoteActivity.this, "Note Auto-saved!", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }catch(InterruptedException ex){
+//                                }
+//                            }
+//                        };
+//                        saveThread.run();
+//                        timeSinceLastChange = System.currentTimeMillis() * 1000;
+//                    }
+//                }
+//            }
+//        });
+
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(textView, InputMethodManager.SHOW_IMPLICIT);

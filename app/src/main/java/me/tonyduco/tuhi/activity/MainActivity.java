@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
+    public static int FRAGMENT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,12 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
 
-        // display the first navigation drawer view on app launch
-        displayView(0);
+        if(getIntent().getSerializableExtra("FRAGMENT") != null)
+        FRAGMENT = (int) getIntent().getSerializableExtra("FRAGMENT");
+        else
+        FRAGMENT = 0;
+
+        displayView(FRAGMENT);
     }
 
 
