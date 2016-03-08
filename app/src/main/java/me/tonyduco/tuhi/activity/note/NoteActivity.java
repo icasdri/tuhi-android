@@ -98,6 +98,7 @@ public class NoteActivity extends ActionBarActivity {
             if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
                 NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
                 newContent.save();
+                Toast.makeText(NoteActivity.this, "Saved", Toast.LENGTH_SHORT).show();
             }
             Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
             startActivity(i);
