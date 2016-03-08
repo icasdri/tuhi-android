@@ -1,6 +1,7 @@
 package me.tonyduco.tuhi.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,8 +15,13 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.malinskiy.superrecyclerview.swipe.SwipeItemManagerInterface;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.historyview.HistoryViewActivity;
+import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.adapter.DeletedAdapter;
 import me.tonyduco.tuhi.decoration.DividerItemDecoration;
+import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
+import me.tonyduco.tuhi.model.NoteContentItem;
+import me.tonyduco.tuhi.model.NoteItem;
 
 public class DeletedFragment extends Fragment {
 
@@ -59,7 +65,30 @@ public class DeletedFragment extends Fragment {
             mEmptyView.setVisibility(View.GONE);
         }
 
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        openRestore(mAdapter.getNote(position));
+                    }
+                })
+        );
+
+
         return rootView;
+    }
+
+    public void openRestore(NoteItem NOTE_ITEM){
+        Intent i = new Intent(getActivity(), HistoryViewActivity.class);
+        i.putExtra("NOTE_CONTENT", NOTE_ITEM.getContent());
+        i.putExtra("NOTE_ITEM", NOTE_ITEM);
+        startActivity(i);
+    }
+
+    public void openNote(NoteItem note){
+        Intent i = new Intent(getActivity(), NoteActivity.class);
+        i.putExtra("NOTE_ITEM", note);
+        getActivity().startActivity(i);
     }
 
     @Override

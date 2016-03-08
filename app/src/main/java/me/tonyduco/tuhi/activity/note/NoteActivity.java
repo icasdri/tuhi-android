@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.activity.MainActivity;
@@ -86,10 +87,18 @@ public class NoteActivity extends ActionBarActivity {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
             if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
-                NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
-            newContent.save();
+                Toast.makeText(NoteActivity.this, "Changes discarded", Toast.LENGTH_SHORT).show();
             }
-//            onBackPressed(); Used to emulate back button (deprecated to fix HistoryActivity)
+            Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        if(id == R.id.action_save){
+            if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
+                NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+                newContent.save();
+            }
             Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
             startActivity(i);
             return true;

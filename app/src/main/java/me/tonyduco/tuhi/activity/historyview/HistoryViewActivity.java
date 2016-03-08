@@ -16,6 +16,7 @@ import me.tonyduco.tuhi.activity.history.HistoryActivity;
 import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
+import me.tonyduco.tuhi.model.NoteType;
 
 public class HistoryViewActivity extends ActionBarActivity {
 
@@ -64,6 +65,7 @@ public class HistoryViewActivity extends ActionBarActivity {
         }else if(id == R.id.action_restore){
             NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), NOTE_CONTENT.getData());
             newContent.save();
+            newContent.setType(NoteType.PLAINTEXT);
             Intent i = new Intent(getApplicationContext(), NoteActivity.class);
             i.putExtra("NOTE_ITEM", NOTE_ITEM);
             startActivity(i);
