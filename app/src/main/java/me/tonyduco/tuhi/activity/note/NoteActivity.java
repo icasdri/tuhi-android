@@ -1,11 +1,13 @@
 package me.tonyduco.tuhi.activity.note;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -153,11 +155,30 @@ public class NoteActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
-            if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
-                Toast.makeText(NoteActivity.this, "Changes Discarded!", Toast.LENGTH_SHORT).show();
+
+            if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.TuhiDialogStyle);
+                builder.setTitle("Discard Changes");
+                builder.setMessage("Unsaved changes have been made to this note! Would you like to discard them or go back?");
+                builder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(NoteActivity.this, "Changes Discarded!", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
+                        startActivity(i);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+            }else{
+                Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
+                startActivity(i);
             }
-            Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
-            startActivity(i);
             return true;
         }
 
