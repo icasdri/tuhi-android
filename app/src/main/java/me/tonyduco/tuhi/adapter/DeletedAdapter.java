@@ -1,12 +1,14 @@
 package me.tonyduco.tuhi.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
@@ -18,6 +20,9 @@ import java.util.Date;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.MainActivity;
+import me.tonyduco.tuhi.activity.historyview.HistoryViewActivity;
+import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 import me.tonyduco.tuhi.model.NoteType;
@@ -59,6 +64,15 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
         swipeLayout.setDragEdge(SwipeLayout.DragEdge.Right);
         swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
 
+        v.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openRestore(getNote(vh.getPosition()));
+                    }
+
+                });
+
         vh.deletedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +82,7 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
 
         return vh;
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
@@ -82,6 +97,13 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
         Collections.reverse(noteDataset);
     }
 
+    public void openRestore(NoteItem NOTE_ITEM){
+        Intent i = new Intent(activity, HistoryViewActivity.class);
+        i.putExtra("NOTE_CONTENT", NOTE_ITEM.getContent());
+        i.putExtra("NOTE_ITEM", NOTE_ITEM);
+        i.putExtra("CONTEXT", "DeletedFragment");
+        activity.startActivity(i);
+    }
     public NoteItem getNote(int position){
         return noteDataset.get(position);
     }
@@ -102,12 +124,13 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
         closeItem(position);
         refreshDataset();
         notifyDataSetChanged();
-        if(position == 0){
+        if(position == 0 && noteDataset.isEmpty()){
             TextView mEmptyView = (TextView) activity.findViewById(R.id.empty_deleted_view);
             SuperRecyclerView mRecyclerView = (SuperRecyclerView) activity.findViewById(R.id.deleted_view);
             mRecyclerView.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
         }
+        Toast.makeText(activity, "Note Permanently Deleted!", Toast.LENGTH_SHORT).show();
     }
 
 }

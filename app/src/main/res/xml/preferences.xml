@@ -17,6 +17,9 @@
         android:key="server-hostname"
         android:inputType="number" />
 
+    <PreferenceCategory
+        android:title="Tuhi Android Client - nosduco@gmail.com">
+        </PreferenceCategory>
     <!--<EditTextPreference android:title="Auto Save"-->
         <!--android:summary="Interval in seconds Tuhi will auto save if there are changes"-->
         <!--android:defaultValue="30"-->

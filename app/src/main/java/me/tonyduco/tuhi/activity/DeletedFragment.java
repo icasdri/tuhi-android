@@ -65,14 +65,14 @@ public class DeletedFragment extends Fragment {
             mEmptyView.setVisibility(View.GONE);
         }
 
-        mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        openRestore(mAdapter.getNote(position));
-                    }
-                })
-        );
+//        mRecyclerView.addOnItemTouchListener(
+//                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//                        openRestore(mAdapter.getNote(position));
+//                    }
+//                })
+//        );
 
 
         return rootView;

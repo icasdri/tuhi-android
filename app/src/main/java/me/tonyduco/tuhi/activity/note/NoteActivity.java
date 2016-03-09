@@ -153,7 +153,7 @@ public class NoteActivity extends ActionBarActivity {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
             if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
-                Toast.makeText(NoteActivity.this, "Changes discarded", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoteActivity.this, "Changes Discarded!", Toast.LENGTH_SHORT).show();
             }
             Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
             startActivity(i);
@@ -164,7 +164,7 @@ public class NoteActivity extends ActionBarActivity {
             if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())){
                 NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
                 newContent.save();
-                Toast.makeText(NoteActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoteActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
             }
             Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
             startActivity(i);
@@ -175,6 +175,7 @@ public class NoteActivity extends ActionBarActivity {
             newContent.setType(NoteType.DELETED);
             newContent.save();
             onBackPressed();
+            Toast.makeText(NoteActivity.this, "Note Deleted!", Toast.LENGTH_SHORT).show();
             return true;
         }
         if(id == R.id.action_history){
