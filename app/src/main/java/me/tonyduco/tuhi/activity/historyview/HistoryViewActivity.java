@@ -54,6 +54,7 @@ public class HistoryViewActivity extends ActionBarActivity {
         Date expiry = new Date(NOTE_CONTENT.getDateCreated() * 1000);
         mToolbar.setTitle(expiry.toString());
         textView.setText(NOTE_CONTENT.getData().toString());
+        textView.setEnabled(false);
 
     }
 
