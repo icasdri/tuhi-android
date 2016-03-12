@@ -193,11 +193,26 @@ public class NoteActivity extends ActionBarActivity {
             return true;
         }
         if(id == R.id.action_delete){
-            NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
-            newContent.setType(NoteType.DELETED);
-            newContent.save();
-            onBackPressed();
-            Toast.makeText(NoteActivity.this, "Note Deleted!", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.TuhiDialogStyle);
+            builder.setTitle("Delete Note");
+            builder.setMessage("Are you sure you would like to delete this note?");
+            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+                    newContent.setType(NoteType.DELETED);
+                    newContent.save();
+                    onBackPressed();
+                    Toast.makeText(NoteActivity.this, "Note Deleted!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.show();
             return true;
         }
         if(id == R.id.action_history){
