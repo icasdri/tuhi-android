@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -159,7 +160,7 @@ public class NoteActivity extends ActionBarActivity {
             if (!NOTE_ITEM.getContent().getData().equals(textView.getText().toString())) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.TuhiDialogStyle);
                 builder.setTitle("Discard Changes");
-                builder.setMessage("Unsaved changes have been made to this note! Would you like to discard them or go back?");
+                builder.setMessage("Unsaved changes have been made to this note! Would you like to discard them, save them, or go back?");
                 builder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -168,7 +169,17 @@ public class NoteActivity extends ActionBarActivity {
                         startActivity(i);
                     }
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Save and Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), textView.getText().toString());
+                        newContent.save();
+                        Toast.makeText(NoteActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext().getApplicationContext(), MainActivity.class);
+                        startActivity(i);
+                    }
+                });
+                builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
