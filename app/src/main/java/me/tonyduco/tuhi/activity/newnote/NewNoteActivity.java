@@ -1,7 +1,10 @@
 package me.tonyduco.tuhi.activity.newnote;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,8 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import me.tonyduco.tuhi.R;
+import me.tonyduco.tuhi.activity.MainActivity;
+import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
 
@@ -56,6 +62,36 @@ public class NewNoteActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if(id == android.R.id.home){
+            if(!(data.getText() == null || data.getText().equals(""))){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.TuhiDialogStyle);
+                builder.setTitle("Unsaved Note");
+                builder.setMessage("You have created a note but have note saved it. Would you like to discard, save, or go back?");
+                builder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onBackPressed();
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Save and Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        NoteItem note = new NoteItem();
+                        NoteContentItem noteContent = new NoteContentItem(note.getNoteId(), data.getText().toString());
+                        note.save();
+                        noteContent.save();
+                        finish();
+                    }
+                });
+                builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+            }
+        }
         if(id == R.id.action_add){
             NoteItem note = new NoteItem();
             NoteContentItem noteContent = new NoteContentItem(note.getNoteId(), data.getText().toString());
