@@ -2,54 +2,89 @@ package me.tonyduco.tuhi.model;
 
 import com.orm.SugarRecord;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 
 public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
+    // SugarORM will provide a long id field (we will use this as "n_local_id")
+    private long n_sync_id;
+    private long date_created;
+    private String packaging_method;
 
-    private String noteid;
-    private String type;
-    private long date_modified;
+    private static Map<Long, NoteItem> cache = new HashMap<>();
 
-    public NoteItem(String note_id, String type, long date_modified){
-        this.noteid = note_id;
-        this.type = type;
-        this.date_modified = date_modified;
-    }
-    public NoteItem(){
-        this(UUID.randomUUID().toString(), "0", System.currentTimeMillis()/1000);
-    }
-
-    public String getNoteId(){
-        return noteid;
+    /**
+     * Default constructor for SugarORM
+     */
+    public NoteItem() {
     }
 
-    public NoteContentItem getContent(){
-        List<NoteContentItem> noteContentDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", new String[] {noteid}, null, "datecreated DESC", "1");
-        this.type = String.valueOf(noteContentDataset.get(0).getType());
-        return noteContentDataset.get(0);
+    /**
+     * Constructor to be used internally when creating new Notes
+     */
+    public NoteItem(PackagingMethod packagingMethod) {
+        this.n_sync_id = 0;
+        this.date_created = System.currentTimeMillis() / 1000;
+        this.packaging_method = packagingMethod.getName();
     }
 
-    public String getType(){
-        return type;
+    public static NoteItem forId(Long id) {
+        if (cache.containsKey(id)) {
+            return cache.get(id);
+        } else {
+            NoteItem item = findAsIterator(NoteItem.class, "id=?", id.toString()).next();
+            cache.put(id, item);
+            return item;
+        }
     }
 
-    public long getDateModified(){
-        return date_modified;
+    public NoteContentItem newContent(JSONObject unpackagedData, int deleted, Properties props) {
+        return new NoteContentItem(this, unpackagedData, deleted, props);
     }
 
-    public void setNoteId(String note_id){
-        this.noteid = note_id;
+    public List<NoteContentItem> allContents() {
+        return NoteContentItem.find(NoteContentItem.class, "note = ?", getId().toString());
     }
 
-    public void setType(String type){
-        this.type = type;
+    public NoteContentItem headContent(){
+        Iterator<NoteContentItem> iter = NoteContentItem.findAsIterator(NoteContentItem.class,
+                "note = ?", new String[] { getId().toString() }, null, "datecreated DESC", "1");
+        return iter.next();
     }
 
-    public void setDateModified(long date_modified){
-        this.date_modified = date_modified;
+    public long getDateCreatedRaw() {
+        return date_created;
+    }
+    public Date getDateCreated(){
+        return new Date(date_created * 1000);
+    }
+
+    public PackagingMethod getPackagingMethod() {
+        return PackagingMethod.forName(this.packaging_method);
+    }
+
+    public String getTitle(Properties prop) {
+        return this.headContent().getTitle(prop);
+    }
+
+    public String getContentPreview(Properties prop) {
+        return this.headContent().getContentPreview(prop);
+    }
+
+    public long getSyncId() {
+        return this.n_sync_id;
+    }
+    public void setSyncId(long syncId) {
+        this.n_sync_id = syncId;
     }
 }

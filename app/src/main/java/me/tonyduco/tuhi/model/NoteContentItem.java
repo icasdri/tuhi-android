@@ -1,95 +1,88 @@
 package me.tonyduco.tuhi.model;
-
-import android.util.Log;
-
 import com.orm.SugarRecord;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.Date;
+import java.util.Properties;
 
 public class NoteContentItem extends SugarRecord<NoteContentItem> implements Serializable {
-    private String note_content_id;
-    private String note;
-    private String data;
-    private Long datecreated;
-    private int type;
+    // SugarORM will provide a long id field (we will use this as "nc_local_id")
+    private long note;
+    private long nc_sync_id;
+    private long date_created;
+    private int deleted;
+    private String packaged_data;
 
 
+    /**
+     * Default constructor for SugarORM
+     */
     public NoteContentItem(){
-
     }
 
-    public NoteContentItem(String note_content_id, String note, String data, Long datecreated){
-        this.note_content_id = note_content_id;
-        this.note = note;
-        this.data = data;
-        this.datecreated = datecreated;
-        this.type = 0;
+    /**
+     * Constructor used by the newContent() method of NoteItem to create new Note Contents
+     */
+    public NoteContentItem(NoteItem note, JSONObject unpackagedData, int deleted, Properties props) {
+        this.note = note.getId();
+        this.nc_sync_id = 0;
+        this.date_created = System.currentTimeMillis() / 1000;
+        this.deleted = deleted;
+        PackagingMethod method = note.getPackagingMethod();
+        this.packaged_data = method.pack(unpackagedData.toString(), props);
     }
 
-    public NoteContentItem(String note, String data){
-        this(UUID.randomUUID().toString(), note, data, System.currentTimeMillis()/1000);
-    }
-
-
-    public String getNoteContentId(){
-        return note_content_id;
-    }
-
-    public String getNote(){
-        return note;
-    }
-
-    public String getData(){
-        return data;
-    }
-
-    public String getTitle() {
-        if(getData().indexOf("\n") == -1) {
-            return getData();
-        }else{
-            return getData().substring(0, getData().indexOf("\n"));
+    public JSONObject getUnpackagedData(Properties props){
+        NoteItem note = NoteItem.forId(this.note);
+        PackagingMethod method = note.getPackagingMethod();
+        try {
+            return new JSONObject(method.unpack(this.packaged_data, props));
+        } catch (JSONException e) {
+            throw new IllegalStateException("Unexpected invalid JSON in database!", e);
         }
     }
 
-    public String getContentPreview(){
-        if(getData().indexOf("\n") == -1) {
-            return "";
-        }else{
-            return getData().substring(getData().indexOf("\n")+1, getData().length());
+    public long getDateCreatedRaw() {
+        return date_created;
+    }
+    public Date getDateCreated(){
+        return new Date(date_created * 1000);
+    }
+
+    public String getTitle(Properties props) {
+        try {
+            return getUnpackagedData(props).getString("title");
+        } catch (JSONException e) {
+            throw new IllegalStateException("Unexpected invalid JSON in database!", e);
         }
     }
 
-    public Long getDateCreated(){
-        return datecreated;
+    public String getContentPreview(Properties props){
+        try {
+            JSONObject o = getUnpackagedData(props);
+            switch (o.getString("type")) {
+                case "plain":
+                   String s = o.getString("text");
+                   if (!s.contains("\n")) {
+                        return "";
+                   } else {
+                       return s.substring(s.indexOf("\n")+1, s.length());
+                   }
+
+                default: return "";
+            }
+        } catch (JSONException e) {
+            throw new IllegalStateException("Unexpected invalid JSON in database!", e);
+        }
     }
 
-    public int getType() {
-        return type;
+    public long getSyncId() {
+        return this.nc_sync_id;
     }
-
-    public void setNoteContentId(String note_content_id){
-        this.note_content_id = note_content_id;
-    }
-
-    public void setNote(String note){
-        this.note = note;
-    }
-
-    public void setData(String data){
-        this.data = data;
-    }
-
-    public void setDateCreated(long datecreated){
-        this.datecreated = datecreated;
-    }
-
-    public void setType(int type){
-        this.type = type;
-        List<NoteItem> noteDataset = NoteItem.find(NoteItem.class, "noteid = ?", new String[] { note }, null, null, "1");
-        noteDataset.get(0).setType(String.valueOf(type));
-        noteDataset.get(0).save();
+    public void setSyncId(long syncId) {
+        this.nc_sync_id = syncId;
     }
 }
