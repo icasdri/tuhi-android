@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
 
     public void openNote(NoteItem note){
         Intent i = new Intent(getActivity(), NoteActivity.class);
-        i.putExtra("NOTE_ITEM", note);
+        i.putExtra("NOTE_ID", note.getId());
         getActivity().startActivity(i);
     }
 

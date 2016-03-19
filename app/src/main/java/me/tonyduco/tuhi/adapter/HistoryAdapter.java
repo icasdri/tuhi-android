@@ -26,7 +26,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public HistoryAdapter(Activity activity){
         super();
         this.activity = activity;
-        NOTE_ITEM = (NoteItem) this.activity.getIntent().getSerializableExtra("NOTE_ITEM");
+        NOTE_ITEM = NoteItem.forId(this.activity.getIntent().getLongExtra("NOTE_ID", -1));
         historyDataset = NOTE_ITEM.allContents();
         Collections.reverse(historyDataset);
     }

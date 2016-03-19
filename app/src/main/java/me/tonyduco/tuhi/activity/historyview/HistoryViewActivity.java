@@ -34,7 +34,7 @@ public class HistoryViewActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         NOTE_CONTENT = (NoteContentItem) getIntent().getSerializableExtra("NOTE_CONTENT");
-        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
+        NOTE_ITEM = NoteItem.forId(getIntent().getLongExtra("NOTE_ID", -1));
 
         if(getIntent().getSerializableExtra("CONTEXT") != null) {
             CONTEXT = (String) getIntent().getSerializableExtra("CONTEXT");
@@ -82,7 +82,7 @@ public class HistoryViewActivity extends ActionBarActivity {
             startActivity(i);
         }else {
             Intent i = new Intent(this, HistoryActivity.class);
-            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            i.putExtra("NOTE_ID", NOTE_ITEM.getId());
             startActivity(i);
         }
     }
@@ -97,7 +97,7 @@ public class HistoryViewActivity extends ActionBarActivity {
                 startActivity(i);
             }else {
                 Intent i = new Intent(this, HistoryActivity.class);
-                i.putExtra("NOTE_ITEM", NOTE_ITEM);
+                i.putExtra("NOTE_ID", NOTE_ITEM.getId());
                 startActivity(i);
             }
             return true;
@@ -107,7 +107,7 @@ public class HistoryViewActivity extends ActionBarActivity {
             newContent.save();
 
             Intent i = new Intent(getApplicationContext(), NoteActivity.class);
-            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            i.putExtra("NOTE_ID", NOTE_ITEM.getId());
             startActivity(i);
             return true;
         }else

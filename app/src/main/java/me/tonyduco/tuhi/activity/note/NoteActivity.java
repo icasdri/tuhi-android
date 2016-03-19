@@ -32,7 +32,7 @@ public class NoteActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
+        NOTE_ITEM = NoteItem.forId(getIntent().getLongExtra("NOTE_ID", -1));
 
         int fragLayoutId = -1;
         boolean unknownType = false;
@@ -140,7 +140,7 @@ public class NoteActivity extends ActionBarActivity {
 
         if(id == R.id.action_history){
             Intent i = new Intent(this, HistoryActivity.class);
-            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            i.putExtra("NOTE_ID", NOTE_ITEM.getId());
             startActivity(i);
         }
         return false;

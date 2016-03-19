@@ -42,6 +42,10 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
     }
 
     public static NoteItem forId(Long id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("A negative Note id was passed: " + id);
+        }
+
         if (cache.containsKey(id)) {
             return cache.get(id);
         } else {

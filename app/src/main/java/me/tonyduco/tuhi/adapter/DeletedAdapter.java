@@ -96,7 +96,7 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
     public void openRestore(NoteItem NOTE_ITEM){
         Intent i = new Intent(activity, HistoryViewActivity.class);
         i.putExtra("NOTE_CONTENT", NOTE_ITEM.headContent());
-        i.putExtra("NOTE_ITEM", NOTE_ITEM);
+        i.putExtra("NOTE_ID", NOTE_ITEM.getId());
         i.putExtra("CONTEXT", "DeletedFragment");
         activity.startActivity(i);
     }

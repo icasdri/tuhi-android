@@ -36,7 +36,7 @@ public class HistoryActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
+        NOTE_ITEM = (NoteItem) NoteItem.forId(getIntent().getLongExtra("NOTE_ID", -1));
 
         setContentView(R.layout.fragment_history);
 
@@ -70,7 +70,7 @@ public class HistoryActivity extends ActionBarActivity {
     public void openHistory(NoteContentItem noteContent){
         Intent i = new Intent(this, HistoryViewActivity.class);
         i.putExtra("NOTE_CONTENT", noteContent);
-        i.putExtra("NOTE_ITEM", NOTE_ITEM);
+        i.putExtra("NOTE_ID", NOTE_ITEM.getId());
         startActivity(i);
     }
 
@@ -83,7 +83,7 @@ public class HistoryActivity extends ActionBarActivity {
     @Override
     public void onBackPressed(){
         Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
-        i.putExtra("NOTE_ITEM", NOTE_ITEM);
+        i.putExtra("NOTE_ID", NOTE_ITEM.getId());
         startActivity(i);
     }
 
@@ -92,7 +92,7 @@ public class HistoryActivity extends ActionBarActivity {
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
             Intent i = new Intent(getApplicationContext().getApplicationContext(), NoteActivity.class);
-            i.putExtra("NOTE_ITEM", NOTE_ITEM);
+            i.putExtra("NOTE_ID", NOTE_ITEM.getId());
             startActivity(i);
             return true;
         }else
