@@ -20,6 +20,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
     private long n_sync_id;
     private long date_created;
     private String packaging_method;
+    private String type;
 
     private static Map<Long, NoteItem> cache = new HashMap<>();
 
@@ -32,10 +33,11 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
     /**
      * Constructor to be used internally when creating new Notes
      */
-    public NoteItem(PackagingMethod packagingMethod) {
+    public NoteItem(PackagingMethod packagingMethod, NoteType type) {
         this.n_sync_id = 0;
         this.date_created = System.currentTimeMillis() / 1000;
         this.packaging_method = packagingMethod.getName();
+        this.type = type.getName();
     }
 
     public static NoteItem forId(Long id) {
@@ -48,8 +50,8 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         }
     }
 
-    public NoteContentItem newContent(JSONObject unpackagedData, int deleted, Properties props) {
-        return new NoteContentItem(this, unpackagedData, deleted, props);
+    public NoteContentItem newContent(JSONObject unpackagedData, int deleted) {
+        return new NoteContentItem(this, unpackagedData, deleted);
     }
 
     public List<NoteContentItem> allContents() {
@@ -73,12 +75,16 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         return PackagingMethod.forName(this.packaging_method);
     }
 
-    public String getTitle(Properties prop) {
-        return this.headContent().getTitle(prop);
+    public NoteType getType() {
+        return NoteType.forName(this.type);
     }
 
-    public String getContentPreview(Properties prop) {
-        return this.headContent().getContentPreview(prop);
+    public String getTitle() {
+        return this.headContent().getTitle();
+    }
+
+    public String getContentPreview() {
+        return this.headContent().getContentPreview();
     }
 
     public long getSyncId() {

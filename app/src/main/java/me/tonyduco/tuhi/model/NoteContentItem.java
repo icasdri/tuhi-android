@@ -26,20 +26,32 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> implements Ser
     /**
      * Constructor used by the newContent() method of NoteItem to create new Note Contents
      */
-    public NoteContentItem(NoteItem note, JSONObject unpackagedData, int deleted, Properties props) {
+    public NoteContentItem(NoteItem note, JSONObject unpackagedData, int deleted) {
         this.note = note.getId();
         this.nc_sync_id = 0;
         this.date_created = System.currentTimeMillis() / 1000;
         this.deleted = deleted;
         PackagingMethod method = note.getPackagingMethod();
-        this.packaged_data = method.pack(unpackagedData.toString(), props);
+        /*
+         * TODO: in the future, this must be able to pass packaging-specific information instead of just null
+         * that may entail getting user input or have some sort of store (for encryption keys, etc.)
+         */
+        this.packaged_data = method.pack(unpackagedData.toString(), null);
     }
 
-    public JSONObject getUnpackagedData(Properties props){
-        NoteItem note = NoteItem.forId(this.note);
+    public NoteItem getNote() {
+        return NoteItem.forId(this.note);
+    }
+
+    public JSONObject getUnpackagedData(){
+        NoteItem note = getNote();
         PackagingMethod method = note.getPackagingMethod();
         try {
-            return new JSONObject(method.unpack(this.packaged_data, props));
+            /*
+             * TODO: in the future, this must be able to pass packaging-specific information instead of just null
+             * that may entail getting user input or have some sort of store (for encryption keys, etc.)
+             */
+            return new JSONObject(method.unpack(this.packaged_data, null));
         } catch (JSONException e) {
             throw new IllegalStateException("Unexpected invalid JSON in database!", e);
         }
@@ -52,25 +64,25 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> implements Ser
         return new Date(date_created * 1000);
     }
 
-    public String getTitle(Properties props) {
+    public String getTitle() {
         try {
-            return getUnpackagedData(props).getString("title");
+            return getUnpackagedData().getString("title");
         } catch (JSONException e) {
             throw new IllegalStateException("Unexpected invalid JSON in database!", e);
         }
     }
 
-    public String getContentPreview(Properties props){
+    public String getContentPreview(){
+        NoteItem note = getNote();
         try {
-            JSONObject o = getUnpackagedData(props);
-            switch (o.getString("type")) {
-                case "plain":
-                   String s = o.getString("text");
-                   if (!s.contains("\n")) {
+            switch (note.getType()) {
+                case PLAIN:
+                    String s = getUnpackagedData().getString("text");
+                    if (!s.contains("\n")) {
                         return "";
-                   } else {
-                       return s.substring(s.indexOf("\n")+1, s.length());
-                   }
+                    } else {
+                        return s.substring(s.indexOf("\n")+1, s.length());
+                    }
 
                 default: return "";
             }

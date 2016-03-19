@@ -1,9 +1,20 @@
 package me.tonyduco.tuhi.model;
 
-public class NoteType {
+public enum NoteType {
+    PLAIN;
 
-    public static final int PLAINTEXT = 0;
-    public static final int DELETED = -1;
-    public static final int PERMANENTLY_DELETED = -2;
+    public String getName() {
+        switch (this) {
+            case PLAIN: return "plain";
+            default: throw new RuntimeException("Unreachable Code");
+        }
+    }
+
+    public static NoteType forName(String name) {
+        switch (name) {
+            case "plain": return PLAIN;
+            default: throw new IllegalArgumentException("Invalid note type" + name);
+        }
+    }
 
 }
