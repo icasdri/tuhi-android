@@ -27,7 +27,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         super();
         this.activity = activity;
         NOTE_ITEM = (NoteItem) this.activity.getIntent().getSerializableExtra("NOTE_ITEM");
-        historyDataset = NoteContentItem.find(NoteContentItem.class, "note = ?", NOTE_ITEM.getNoteId());
+        historyDataset = NOTE_ITEM.allContents();
         Collections.reverse(historyDataset);
     }
 
@@ -53,7 +53,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteContentItem noteContent = historyDataset.get(position);
-        Date expiry = new Date(noteContent.getDateCreated() * 1000);
+        Date expiry = noteContent.getDateCreated();
         holder.date.setText(formatDate(expiry));
         holder.title.setText(noteContent.getTitle());
     }

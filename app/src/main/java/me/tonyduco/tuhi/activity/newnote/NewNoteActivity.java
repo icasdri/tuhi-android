@@ -10,9 +10,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
+import me.tonyduco.tuhi.model.NoteType;
+import me.tonyduco.tuhi.model.PackagingMethod;
 
 public class NewNoteActivity extends ActionBarActivity {
 
@@ -57,10 +62,26 @@ public class NewNoteActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_add){
-            NoteItem note = new NoteItem();
-            NoteContentItem noteContent = new NoteContentItem(note.getNoteId(), data.getText().toString());
+            NoteItem note = new NoteItem(PackagingMethod.NONE, NoteType.PLAIN);
             note.save();
-            noteContent.save();
+
+            String text = data.getText().toString();
+            int index = text.indexOf('\n');
+            String title = text.substring(0, index >= 0 ? index : text.length());
+
+            try {
+                JSONObject obj = new JSONObject();
+                obj.put("title", title);
+                obj.put("text", text);
+                obj.put("word_wrap", "normal");
+                obj.put("spell_check", "off");
+
+                NoteContentItem noteContent = note.newContent(obj, 0);
+                noteContent.save();
+            } catch (JSONException e) {
+                throw new RuntimeException("Unexpected JSON error", e);
+            }
+
             finish();
             return true;
         }

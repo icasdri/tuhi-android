@@ -80,7 +80,7 @@ public class DeletedFragment extends Fragment {
 
     public void openRestore(NoteItem NOTE_ITEM){
         Intent i = new Intent(getActivity(), HistoryViewActivity.class);
-        i.putExtra("NOTE_CONTENT", NOTE_ITEM.getContent());
+        i.putExtra("NOTE_CONTENT", NOTE_ITEM.headContent());
         i.putExtra("NOTE_ITEM", NOTE_ITEM);
         i.putExtra("CONTEXT", "DeletedFragment");
         startActivity(i);

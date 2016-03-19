@@ -2,7 +2,6 @@ package me.tonyduco.tuhi.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import me.tonyduco.tuhi.R;
 import me.tonyduco.tuhi.model.NoteItem;
-import me.tonyduco.tuhi.model.NoteType;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
@@ -50,13 +48,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteItem note = noteDataset.get(position);
-        holder.title.setText(note.getContent().getTitle());
-        holder.data.setText(note.getContent().getContentPreview());
+        holder.title.setText(note.getTitle());
+        holder.data.setText(note.getContentPreview());
     }
 
     public void refreshDataset(){
-        noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.PLAINTEXT));
-        Collections.reverse(noteDataset);
+        noteDataset = NoteItem.allNonDeleted();
     }
 
     public NoteItem getNote(int position){

@@ -20,12 +20,9 @@ import java.util.Date;
 import java.util.List;
 
 import me.tonyduco.tuhi.R;
-import me.tonyduco.tuhi.activity.MainActivity;
 import me.tonyduco.tuhi.activity.historyview.HistoryViewActivity;
-import me.tonyduco.tuhi.listener.RecyclerItemClickListener;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
-import me.tonyduco.tuhi.model.NoteType;
 
 public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> {
 
@@ -87,19 +84,18 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         final NoteItem note = noteDataset.get(position);
-        Date expiry = new Date(note.getContent().getDateCreated() * 1000);
-        holder.title.setText(note.getContent().getTitle());
-        holder.data.setText(formatDate(expiry));
+        final NoteContentItem nc = note.headContent();
+        holder.title.setText(nc.getTitle());
+        holder.data.setText(formatDate(nc.getDateCreated()));
     }
 
     public void refreshDataset(){
-        noteDataset = NoteItem.find(NoteItem.class, "type = ?", String.valueOf(NoteType.DELETED));
-        Collections.reverse(noteDataset);
+        noteDataset = NoteItem.allSoftDeleted();
     }
 
     public void openRestore(NoteItem NOTE_ITEM){
         Intent i = new Intent(activity, HistoryViewActivity.class);
-        i.putExtra("NOTE_CONTENT", NOTE_ITEM.getContent());
+        i.putExtra("NOTE_CONTENT", NOTE_ITEM.headContent());
         i.putExtra("NOTE_ITEM", NOTE_ITEM);
         i.putExtra("CONTEXT", "DeletedFragment");
         activity.startActivity(i);
@@ -118,9 +114,13 @@ public class DeletedAdapter extends BaseSwipeAdapter<DeletedAdapter.ViewHolder> 
     }
 
     public void remove(int position) {
-        NoteContentItem newContent = new NoteContentItem(noteDataset.get(position).getNoteId(), noteDataset.get(position).getContent().getNote());
-        newContent.setType(NoteType.PERMANENTLY_DELETED);
-        newContent.save();
+        NoteItem note = noteDataset.get(position);
+        for (NoteContentItem nc : note.allContents()) {
+            // TODO: this iterative approach may be expensive. May need to consider bulk delete operation
+            nc.delete();
+        }
+        NoteContentItem permaDeleteNc = noteDataset.get(position).newContent(null, 2);
+        permaDeleteNc.save();
         closeItem(position);
         refreshDataset();
         notifyDataSetChanged();

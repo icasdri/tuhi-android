@@ -2,7 +2,6 @@ package me.tonyduco.tuhi.activity.historyview;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,16 +9,17 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 import me.tonyduco.tuhi.R;
-import me.tonyduco.tuhi.activity.DeletedFragment;
 import me.tonyduco.tuhi.activity.MainActivity;
 import me.tonyduco.tuhi.activity.history.HistoryActivity;
 import me.tonyduco.tuhi.activity.note.NoteActivity;
 import me.tonyduco.tuhi.model.NoteContentItem;
 import me.tonyduco.tuhi.model.NoteItem;
-import me.tonyduco.tuhi.model.NoteType;
 
 public class HistoryViewActivity extends ActionBarActivity {
 
@@ -36,10 +36,11 @@ public class HistoryViewActivity extends ActionBarActivity {
         NOTE_CONTENT = (NoteContentItem) getIntent().getSerializableExtra("NOTE_CONTENT");
         NOTE_ITEM = (NoteItem) getIntent().getSerializableExtra("NOTE_ITEM");
 
-        if(getIntent().getSerializableExtra("CONTEXT") != null)
-        CONTEXT = (String) getIntent().getSerializableExtra("CONTEXT");
-        else
-        CONTEXT = "HistoryActivity";
+        if(getIntent().getSerializableExtra("CONTEXT") != null) {
+            CONTEXT = (String) getIntent().getSerializableExtra("CONTEXT");
+        } else {
+            CONTEXT = "HistoryActivity";
+        }
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new HistoryViewFragment()).commit();
         setContentView(R.layout.fragment_historyview);
@@ -51,10 +52,19 @@ public class HistoryViewActivity extends ActionBarActivity {
 
         textView = (EditText) findViewById(R.id.historyview_text_view);
 
-        Date expiry = new Date(NOTE_CONTENT.getDateCreated() * 1000);
+        Date expiry = NOTE_CONTENT.getDateCreated();
         mToolbar.setTitle(expiry.toString());
-        textView.setText(NOTE_CONTENT.getData().toString());
-        textView.setEnabled(false);
+
+        try {
+            switch (NOTE_ITEM.getType()) {
+                case PLAIN:
+                    JSONObject obj = NOTE_CONTENT.getUnpackagedData();
+                    textView.setText(obj.getString("text"));
+                    textView.setEnabled(false);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException("Unexpected JSON error", e);
+        }
 
     }
 
@@ -92,9 +102,10 @@ public class HistoryViewActivity extends ActionBarActivity {
             }
             return true;
         }else if(id == R.id.action_restore){
-            NoteContentItem newContent = new NoteContentItem(NOTE_ITEM.getNoteId(), NOTE_CONTENT.getData());
+            JSONObject obj = NOTE_CONTENT.getUnpackagedData();
+            NoteContentItem newContent = NOTE_ITEM.newContent(obj, 0);
             newContent.save();
-            newContent.setType(NoteType.PLAINTEXT);
+
             Intent i = new Intent(getApplicationContext(), NoteActivity.class);
             i.putExtra("NOTE_ITEM", NOTE_ITEM);
             startActivity(i);
