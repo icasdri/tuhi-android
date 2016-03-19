@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -44,7 +45,7 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         if (cache.containsKey(id)) {
             return cache.get(id);
         } else {
-            NoteItem item = findAsIterator(NoteItem.class, "id=?", id.toString()).next();
+            NoteItem item = findAsIterator(NoteItem.class, "id=?", Long.toString(id)).next();
             cache.put(id, item);
             return item;
         }
@@ -54,13 +55,32 @@ public class NoteItem extends SugarRecord<NoteItem> implements Serializable {
         return new NoteContentItem(this, unpackagedData, deleted);
     }
 
+    public static List<NoteItem> allWithDeletedFlag(int flag) {
+        // TODO: this is super-expensive. Will need to optimize (maybe cache which notes are deleted)
+        List<NoteItem> list = new ArrayList<>();
+        Iterator<NoteItem> iter = NoteItem.findAll(NoteItem.class);
+        while (iter.hasNext()) {
+            NoteItem n = iter.next();
+            if (n.headContent().getDeletedFlag() == flag) {
+                list.add(n);
+            }
+        }
+        return list;
+    }
+    public static List<NoteItem> allSoftDeleted() {
+        return allWithDeletedFlag(1);
+    }
+    public static List<NoteItem> allNonDeleted() {
+        return allWithDeletedFlag(0);
+    }
+
     public List<NoteContentItem> allContents() {
-        return NoteContentItem.find(NoteContentItem.class, "note = ?", getId().toString());
+        return NoteContentItem.find(NoteContentItem.class, "note = ?", Long.toString(getId()));
     }
 
     public NoteContentItem headContent(){
         Iterator<NoteContentItem> iter = NoteContentItem.findAsIterator(NoteContentItem.class,
-                "note = ?", new String[] { getId().toString() }, null, "datecreated DESC", "1");
+                "note = ?", new String[] { Long.toString(getId()) }, null, "datecreated DESC", "1");
         return iter.next();
     }
 

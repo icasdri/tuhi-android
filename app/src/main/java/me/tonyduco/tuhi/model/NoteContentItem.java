@@ -64,6 +64,10 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> implements Ser
         return new Date(date_created * 1000);
     }
 
+    public int getDeletedFlag() {
+        return this.deleted;
+    }
+
     public String getTitle() {
         try {
             return getUnpackagedData().getString("title");
