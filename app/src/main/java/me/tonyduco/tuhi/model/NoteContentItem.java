@@ -36,7 +36,13 @@ public class NoteContentItem extends SugarRecord<NoteContentItem> implements Ser
          * TODO: in the future, this must be able to pass packaging-specific information instead of just null
          * that may entail getting user input or have some sort of store (for encryption keys, etc.)
          */
-        this.packaged_data = method.pack(unpackagedData.toString(), null);
+
+        //Temporary null-check to fix permanently deleting a note
+        String unpackagedDataString = null;
+        if(unpackagedData != null)
+            unpackagedDataString = unpackagedData.toString();
+
+        this.packaged_data = method.pack(unpackagedDataString, null);
     }
 
     public NoteItem getNote() {
