@@ -29,6 +29,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         NOTE_ITEM = NoteItem.forId(this.activity.getIntent().getLongExtra("NOTE_ID", -1));
         historyDataset = NOTE_ITEM.allContents();
         Collections.reverse(historyDataset);
+
+        //Removes the current NoteItem (hence cannot restore it itself)
+        historyDataset.remove(0);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
